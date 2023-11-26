@@ -4,7 +4,7 @@ this problem can be solved by brute force approach---O(n2)
 '''
 
 
-def totalFruit(s):
+def long(s,k):
     i=0
     max=float('-inf')
     while i<len(s):
@@ -13,7 +13,7 @@ def totalFruit(s):
         while j<len(s):
             if s[j] not in s:
                 s.add(s[j])
-            if len(s)<=2:
+            if len(s)<=k:
                 if (j-i+1)>max:
                     max=j-i+1
             elif len(s)>2:
@@ -25,11 +25,11 @@ def totalFruit(s):
 
 '''
 this problem can be solved by sliding window pattern ---O(n)
-and the window size must be two distinct fruits
+and the window size must be atmost k distinct  characters
 
 turning point 
 ---------------------
-   if len(dict)>=3:
+   if len(dict)>=(k+1):
         min_ind=min(dict.values())
         del dict[s[min_ind]]
         l=min_ind+1
@@ -37,14 +37,14 @@ turning point
 '''
 
 
-def totalFruit(s):
+def long(s,k):
     l,r=0,0
     max=float('-inf')
     
     dict={}
     while r<len(s):
         dict[s[r]]=r
-        if len(dict)>=3:
+        if len(dict)>=(k+1):
             min_ind=min(dict.values())
             del dict[s[min_ind]]
             l=min_ind+1
