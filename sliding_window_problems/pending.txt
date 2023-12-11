@@ -1,0 +1,12 @@
+Permutation In String
+Frequency of The Most Frequent Element
+Minimum Number of Flips to Make The Binary String Alternating
+Find K Closest Elements
+Minimum Operations to Reduce X to Zero
+Minimum Window Substring
+Sliding Window Maximum
+Substring with Concatenation of All Words
+Count Unique Characters of All Substrings of a Given String
+Minimum Number of K Consecutive Bit Flips
+Longest Subarray of 1's After Deleting One Element
+https://leetcode.com/problems/find-all-anagrams-in-a-string/
