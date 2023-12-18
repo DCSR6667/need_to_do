@@ -14,9 +14,9 @@ def twoSum(nums,target):
         i+=1
         
 '''
-this problem can be solved by hashmap approach ---O(n)
+this problem can be solved by hashmap approach so that we can reduce searching time ---O(n)
 space---O(n)
- if a+b=sum then b=sum-a
+
 '''
 
 def twoSum(nums,target):

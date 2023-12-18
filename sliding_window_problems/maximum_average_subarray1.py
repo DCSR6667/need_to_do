@@ -1,7 +1,6 @@
 '''
 this problem can be solved by brute force approach --O(n2)
 
-
 '''
 
 
