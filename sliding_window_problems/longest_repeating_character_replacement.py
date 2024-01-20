@@ -44,7 +44,7 @@ def characterReplacement(s,k):
     d={}
     while r<len(s):
         d[s[r]]=1+d.get(s[r],0)
-        while (r-l+1)-(max(d.values()))>k:
+        if (r-l+1)-(max(d.values()))>k:
             d[s[l]]-=1
             l=l+1
         if (r-l+1)>maxi:

@@ -19,21 +19,26 @@ this problem can be solved by sliding window problem---O(n)
 
 turning point
 --------------------
- if r-d[nums[r]]>k:
-    d[nums[r]]=r
+ if r-l>k:
+    window.remove(nums[l])
+    l+=1
+ 
 '''
 
+
 def containsNearbyDuplicate(nums,k):
+    window=set()
     l,r=0,0
-    d={}
     while r<len(nums):
-        if nums[r] not in d.keys():
-            d[nums[r]]=r
-        elif r-d[nums[r]]>k:
-            d[nums[r]]=r
+        if r-l>k:
+            window.remove(nums[l])
+            l+=1
+        if nums[r] not in window:
+            window.add(nums[r])
         else:
             return True
         r+=1
     return False
-        
+
+
         
