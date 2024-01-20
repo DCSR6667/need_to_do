@@ -41,12 +41,14 @@ def longestOnes(self, nums: List[int], k: int) -> int:
     while r<len(nums):
         if nums[r]==0:
             count+=1
-        if count<=k:
-            maxi=max((r-l+1),maxi)
+       
         while count>k:
             if nums[l]==0:
                 count-=1
             l+=1
+
+        if count<=k:
+            maxi=max((r-l+1),maxi)
         r+=1
     if maxi==float('-inf'):
         return 0

@@ -29,7 +29,7 @@ def sortColors(nums):
 
 '''
 
-this problem can be solved by two pointers approach by dutch national flag--O(n)
+this problem can be solved  by dutch national flag--O(n)
 
 low-1 region --contains zeroes
 high+1 region--contains twos

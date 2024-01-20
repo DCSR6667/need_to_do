@@ -29,29 +29,23 @@ def findMaxAverage(nums,k):
 the below approach is sliding window approach ---O(n)
 turning point 
 ----------------
- if count==k:
-    avg=sum/k
-    if avg>max:
-        max=avg
-    count=count-1
+ if (r-l+1)>k:
     sum=sum-nums[l]
-    l+=1
-
+    l=l+1
 '''
 
 
 def findMaxAverage(nums,k):
-    l,r,sum,count=0,0,0,0
-    max=float('-inf')
+    l,r=0,0
+    sum=0
+    maxi=float('-inf')
     while r<len(nums):
         sum=sum+nums[r]
-        count+=1
-        if count==k:
-            avg=sum/k
-            if avg>max:
-                max=avg
-            count=count-1
+        if (r-l+1)>k:
             sum=sum-nums[l]
-            l+=1
+            l=l+1
+        if (r-l+1)==k:
+            if sum/k>maxi:
+                maxi=sum/k
         r+=1
-    return max
+    return maxi

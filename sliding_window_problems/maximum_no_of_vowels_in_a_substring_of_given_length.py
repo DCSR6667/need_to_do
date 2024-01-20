@@ -32,23 +32,20 @@ this below problem can be solved by sliding window problem---O(n)
 '''
 
 
+
 def maxVowels(s,k):
     l,r=0,0
-    count=0
+    countV=0
     max_len=float('-inf')
     while r<len(s):
-        if (r-l+1)<=k:
-            if s[r]=='a' or s[r]=='e' or s[r]=='i' or s[r]=='o' or s[r]=='u':
-                count+=1
-                if count>max_len:
-                    max_len=count
-            r+=1
-        else:
+        if s[r]=='a' or s[r]=='e' or s[r]=='i' or s[r]=='o' or s[r]=='u':
+            countV+=1
+        if (r-l+1)>k:
             if s[l]=='a' or s[l]=='e' or s[l]=='i' or s[l]=='o' or s[l]=='u':
-                count-=1
+                countV-=1
             l+=1
-
-    if max_len==float('-inf'):
-        return 0
-    else:
-        return max_len
+        if (r-l+1)==k:
+            if countV>max_len:
+                max_len=countV
+        r+=1
+    return max_len

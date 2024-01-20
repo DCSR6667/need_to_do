@@ -26,19 +26,22 @@ turning point
 '''
 
 
+
 def containsNearbyDuplicate(nums,k):
-    window=set()
+    s=set()
     l,r=0,0
     while r<len(nums):
-        if r-l>k:
-            window.remove(nums[l])
-            l+=1
-        if nums[r] not in window:
-            window.add(nums[r])
+        if nums[r] not in s:
+            s.add(nums[r])
+            r+=1
         else:
-            return True
-        r+=1
+            if (r-l)<=k:
+                return True
+            else:
+                s.remove(nums[l])
+                l+=1
     return False
+       
 
 
         

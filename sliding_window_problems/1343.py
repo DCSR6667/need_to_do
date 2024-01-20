@@ -35,17 +35,19 @@ turning point
     l+=1
 '''
 
+
 def numOfSubarrays(arr,k,threshold):
-    l,r,sum,count,res=0,0,0,0,0
+    l,r=0,0
+    sum=0
+    count=0
     while r<len(arr):
         sum=sum+arr[r]
-        count+=1
-        if count==k:
-            avg=sum/k
-            if avg>=threshold:
-                res+=1
+        if (r-l+1)>k:
             sum=sum-arr[l]
-            count-=1
             l+=1
+
+        if (r-l+1)==k:
+            if sum/(r-l+1)>=threshold:
+                count+=1
         r+=1
-    return res
+    return count
