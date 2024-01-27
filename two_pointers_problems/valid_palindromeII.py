@@ -2,24 +2,24 @@
 this problem can be solved by two pointers approach----O(n)
 '''
 
-def ispalindrome(s):
-    l,r=0,len(s)-1
-    while l<r:
-        if s[l]!=s[r]:
-            return False
-        l+=1
-        r-=1
-    return True
 
+def palin(s,i,j):
+    while i<j:
+        if s[i]!=s[j]:
+            return False
+        elif s[i]==s[j]:
+            i+=1
+            j-=1
+    return True
 def validPalindrome(s):
-    l,r=0,len(s)-1
-    while l<r:
-        if s[l]==s[r]:
-            l+=1
-            r-=1
-        elif s[l]!=s[r]:
-            skipL,skipR=s[l+1:r+1],s[l:r]
-            if ispalindrome(skipL) or ispalindrome(skipR):
+    i=0
+    j=len(s)-1
+    while i<j:
+        if s[i]==s[j]:
+            i+=1
+            j-=1
+        elif s[i]!=s[j]:
+            if palin(s,i+1,j) or palin(s,i,j-1):
                 return True
             else:
                 return False

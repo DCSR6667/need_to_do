@@ -89,13 +89,15 @@ def fourSum(nums,target):
             while l<h:
                 if nums[i]+nums[j]+nums[l]+nums[h]==target:
                     lt.append([nums[i],nums[j],nums[l],nums[h]])
-                    
-                    while l<h and nums[l]==nums[l+1]:
-                        l+=1
                     l+=1
-                    while l<h and nums[h]==nums[h-1]:
-                        h-=1
                     h-=1
+                    
+                    while l<h and nums[l]==nums[l-1]:
+                        l+=1
+                    
+                    while l<h and nums[h]==nums[h+1]:
+                        h-=1
+                    
                 elif nums[i]+nums[j]+nums[l]+nums[h]>target:
                     h-=1
                 else:
