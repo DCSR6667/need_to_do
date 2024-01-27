@@ -1,0 +1,12 @@
+https://leetcode.com/problems/minimum-difference-between-highest-and-lowest-of-k-scores/
+https://leetcode.com/problems/remove-duplicates-from-sorted-array/
+https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/
+https://leetcode.com/problems/container-with-most-water/
+https://leetcode.com/problems/number-of-subsequences-that-satisfy-the-given-sum-condition/
+https://leetcode.com/problems/rotate-array/
+https://leetcode.com/problems/array-with-elements-not-equal-to-average-of-neighbors/
+https://leetcode.com/problems/boats-to-save-people/
+https://leetcode.com/problems/trapping-rain-water/
+https://leetcode.com/problems/3sum-smaller/
+https://leetcode.com/problems/shortest-unsorted-continuous-subarray/
+https://leetcode.com/problems/backspace-string-compare/
