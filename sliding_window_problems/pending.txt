@@ -1,15 +1,15 @@
-Permutation In String
-Frequency of The Most Frequent Element
-Minimum Number of Flips to Make The Binary String Alternating
-Find K Closest Elements
-Minimum Operations to Reduce X to Zero
-Minimum Window Substring
-Sliding Window Maximum
+https://leetcode.com/problems/permutation-in-string/
+https://leetcode.com/problems/frequency-of-the-most-frequent-element/
+https://leetcode.com/problems/minimum-number-of-flips-to-make-the-binary-string-alternating/
+https://leetcode.com/problems/find-k-closest-elements/
+https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/
+https://leetcode.com/problems/minimum-window-substring/
+https://leetcode.com/problems/sliding-window-maximum/
 
 
-Substring with Concatenation of All Words
-Count Unique Characters of All Substrings of a Given String
-Minimum Number of K Consecutive Bit Flips
-Longest Subarray of 1's After Deleting One Element
+https://leetcode.com/problems/substring-with-concatenation-of-all-words/
+https://leetcode.com/problems/count-unique-characters-of-all-substrings-of-a-given-string/
+https://leetcode.com/problems/minimum-number-of-k-consecutive-bit-flips/
+https://leetcode.com/problems/longest-subarray-of-1s-after-deleting-one-element/
 
 https://leetcode.com/problems/find-all-anagrams-in-a-string/
