@@ -42,10 +42,28 @@ class single_linked_list:
             new=node(val)
             new.next=temp.next
             temp.next=new
-        
 
-    
-    
+
+    def deleteAtFirst(self):
+
+        if self.head is None:
+            print("we can't perform delete operations because linked list is empty")
+        else:
+            temp=self.head
+            self.head=self.head.next
+            temp.next=None
+
+    def deleteAtLast(self):
+        temp=self.head
+        if self.head is None:
+            print("we can't delete a node because linked list is empty")
+            return
+        while temp.next!=self.tail:
+            temp=temp.next
+        self.tail=temp
+        temp.next=None
+
+
 
     def length(self):
         temp=self.head
@@ -70,13 +88,20 @@ class single_linked_list:
 sll=single_linked_list()
 sll.insertAtFirst(10)
 sll.insertAtFirst(20)
-sll.insertAtFirst(30)
-sll.insertAtFirst(40)
-sll.insertAtLast(50)
-sll.insertAtLast(60)
-sll.insertAtLocation(0,-1)
-sll.insertAtLocation(7,70)
-sll.insertAtLocation(2,29)
+sll.insertAtFirst(10)
+sll.insertAtFirst(20)
+sll.insertAtFirst(10)
+sll.insertAtFirst(20)
+
+sll.display()
+print()
+sll.deleteAtLast()
+sll.deleteAtLast()
+sll.deleteAtLast()
+sll.deleteAtLast()
+sll.deleteAtLast()
+sll.deleteAtLast()
+sll.deleteAtLast()
 sll.display()
 
 
