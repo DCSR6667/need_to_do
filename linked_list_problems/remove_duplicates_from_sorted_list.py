@@ -12,16 +12,12 @@ space--O(1)
 class Solution:
     def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
         temp=head
-        dummy=None
-        while temp:
-            if dummy is None:
-                dummy=temp
-                temp=temp.next
-            elif dummy.val==temp.val:
-                dummy.next=temp.next
-                temp.next=None
-                temp=dummy.next
+        while temp is not None and temp.next is not None:
+            if temp.val==temp.next.val:
+                temp1=temp.next
+                temp.next=temp1.next
+                temp1.next=None
             else:
-                dummy=temp
                 temp=temp.next
         return head
+        
