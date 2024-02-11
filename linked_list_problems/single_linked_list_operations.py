@@ -27,7 +27,7 @@ class single_linked_list:
             self.head=new
 
 
-    def insertAtLocation(self,loc,val):
+    def insertAtLocation(self,loc,val): 
 
         if loc==0:
             self.insertAtFirst(val)
