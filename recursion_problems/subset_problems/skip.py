@@ -42,4 +42,4 @@ def skipAppNotApple(up):
     
 
 
-print(skipAppNotApple("appledsfdnsfappledsfjjapp"))
+print(skip1("abdsjsfa"))

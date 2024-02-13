@@ -28,6 +28,17 @@ def permutation1(res,inp):
         i+=1
     return net
 
+def permutation2(res,inp):
+    if len(inp)==0:
+        print(res)
+        return
+    size=len(inp)
+    i=0
+    while i<size:
+        permutation2(res+inp[i],inp.replace(inp[i],""))
+        i+=1
+    
+
 
 def permutation_count(res,inp):
     if len(inp)==0:
@@ -43,4 +54,4 @@ def permutation_count(res,inp):
         i+=1
     return count
     
-print(permutation_count("","abcd"))
+permutation2("","ab")
