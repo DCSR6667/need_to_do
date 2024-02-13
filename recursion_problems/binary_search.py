@@ -10,4 +10,4 @@ def binary_search(a,target,s,e):
         return binary_search(a,target,mid+1,e)
     
 a=[1,2,3,4,5]
-print(binary_search(a,0,0,len(a)-1))
+print(binary_search(a,0,0,len(a)-1)) 
