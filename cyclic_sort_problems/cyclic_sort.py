@@ -13,7 +13,6 @@ def cyclic_sort(nums):
     
 
 
-
 nums=[3,4,-1,1]
 cyclic_sort(nums)
 print(nums)
