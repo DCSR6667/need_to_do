@@ -1,3 +1,8 @@
+'''
+find the peak element and perform binary search
+on left side and right side--O(logn)
+'''
+
 # """
 # This is MountainArray's API interface.
 # You should not implement it, or speculate about its implementation
