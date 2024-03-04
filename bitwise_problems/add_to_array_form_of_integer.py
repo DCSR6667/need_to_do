@@ -37,7 +37,7 @@ class Solution:
         return l
        
 ''''
-time complexity---O(kdigits)
+time complexity---O(kdigits+carry)
 space--O(1)
 
 '''
