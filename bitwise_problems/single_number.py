@@ -10,7 +10,7 @@ class Solution:
     
 '''
 this problem can be solved by using hashmap--O(n+n)
-space--O(n)
+space--O(ns)
 '''
     
 class Solution:

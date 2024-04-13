@@ -1,6 +1,6 @@
 '''
 1.take a bit and shift to right most position
-2.and shift the bit to left suitable position
+2.and shift that bit to left suitable position
 3.and add it to the result
 
 
