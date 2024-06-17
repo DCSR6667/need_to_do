@@ -14,8 +14,6 @@ class KthLargest:
         while len(self.nums)>k:
             heapq.heappop(self.nums)
         
-        
-
     def add(self, val: int) -> int:
         if len(self.nums)<self.k:
             heapq.heappush(self.nums,val)
