@@ -16,16 +16,7 @@ def skip1(up):
     resfrombelow=skip1(up[1:])
     return p+resfrombelow
 
-def skipApple(up):
-    if len(up)==0:
-        return ""
-    if up.startswith("apple"):
-        ch=""
-        resfrombelow=skipApple(up[5:])
-    else:
-        ch=up[0]
-        resfrombelow=skipApple(up[1:])
-    return ch+resfrombelow
+
 
 
 def skipAppNotApple(up):
