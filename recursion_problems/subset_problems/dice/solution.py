@@ -1,3 +1,5 @@
+# // how many ways we can make sum num with these [1,2,3,4,5,6] numbers
+
 def dice(res,inp):
     if inp==0:
         print(res)

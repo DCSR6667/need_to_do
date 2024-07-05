@@ -24,5 +24,5 @@ def search_inf(nums,target):
             low=high+1
             high=high+(high-temp+1)*2
 nums=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]           
-print(search_inf(nums,13))
+print(search_inf(nums,20))
             

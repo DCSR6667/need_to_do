@@ -20,7 +20,7 @@ def maze_print_all_paths(res,row,col,maze):
         
     maze[row][col]=True
     
-def maze_print_all_paths_in_matrix(res,row,col,maze,step,path):
+def maze_print_all_paths_and_matrix(res,row,col,maze,step,path):
     if row==len(maze)-1 and col==len(maze[0])-1:
         path[row][col]=step
         
@@ -41,16 +41,16 @@ def maze_print_all_paths_in_matrix(res,row,col,maze,step,path):
     path[row][col]=step
     
     if row<len(maze)-1:
-        maze_print_all_paths_in_matrix(res+"D",row+1,col,maze,step+1,path)
+        maze_print_all_paths_and_matrix(res+"D",row+1,col,maze,step+1,path)
         
     if col<len(maze[0])-1:
-        maze_print_all_paths_in_matrix(res+"R",row,col+1,maze,step+1,path)
+        maze_print_all_paths_and_matrix(res+"R",row,col+1,maze,step+1,path)
   
     if row>0:
-        maze_print_all_paths_in_matrix(res+"U",row-1,col,maze,step+1,path)
+        maze_print_all_paths_and_matrix(res+"U",row-1,col,maze,step+1,path)
         
     if col>0:
-        maze_print_all_paths_in_matrix(res+"L",row,col-1,maze,step+1,path)
+        maze_print_all_paths_and_matrix(res+"L",row,col-1,maze,step+1,path)
         
     maze[row][col]=True
     
@@ -60,4 +60,4 @@ def maze_print_all_paths_in_matrix(res,row,col,maze,step,path):
 maze=[[True,True,True],[True,True,True],[True,True,True]]
 path=[[0,0,0],[0,0,0],[0,0,0]]
 
-maze_print_all_paths_in_matrix("",0,0,maze,1,path)
+maze_print_all_paths_and_matrix("",0,0,maze,1,path)
