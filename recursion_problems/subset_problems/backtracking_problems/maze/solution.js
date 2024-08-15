@@ -34,11 +34,11 @@ const maze_print_all_paths=(maze,row,col,res)=>
                 maze_print_all_paths(maze,row,col-1,res+"L"); 
             }
 
-        if(row<maze.length-1 && col<maze[0].length-1)
-            {
-                maze_print_all_paths(maze,row+1,col+1,res+"X");
+        // if(row<maze.length-1 && col<maze[0].length-1)
+        //     {
+        //         maze_print_all_paths(maze,row+1,col+1,res+"X");
 
-            }
+        //     }
 
         maze[row][col]=true;
 
@@ -106,8 +106,13 @@ const maze_print_all_paths=(maze,row,col,res)=>
 
 
 
-var maze=[[true,true,true],[true,true,true],[true,true,true]];
+var maze=[[true,true,true,true,true],[true,true,true,true,true],
+[true,true,true,true,true],
+[true,true,true,true,true],
+[true,true,true,true,true]];
 
-var path=[[0,0,0],[0,0,0],[0,0,0]];
+maze_print_all_paths(maze,0,0,"");
 
-maze_print_all_paths_and_matrix(maze,0,0,"",path,1);
+// var path=[[0,0,0],[0,0,0],[0,0,0]];
+
+// maze_print_all_paths_and_matrix(maze,0,0,"",path,1);

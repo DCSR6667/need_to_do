@@ -1,3 +1,6 @@
+// time complexity--O(n*pow(2,n))
+// space complexity--O(n*pow(2,n))
+
 const subsets_iwd=(s)=>
     {
         res=[[]];

@@ -1,5 +1,5 @@
 '''
-this problem can be solved by bitwise operators---O(nlog(digits))
+this problem can be solved by bitwise operators---O(nlog(no of set bits))
 '''
 
 class Solution:

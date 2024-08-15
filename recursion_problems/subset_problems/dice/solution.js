@@ -1,4 +1,4 @@
-// how many ways we can make sum num with these [1,2,3,4,5,6] numbers
+// how many ways we can make sum of num with these [1,2,3,4,5,6] numbers
 const dice=(num,res,combine_res)=>
     {
 

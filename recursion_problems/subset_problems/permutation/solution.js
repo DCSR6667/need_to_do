@@ -49,4 +49,4 @@ const permutation1=(s,res)=>
 
     };
 
-console.log(permutation1("abc",""));
+console.log(permutation1("123",""));

@@ -17,7 +17,7 @@ class Solution {
         {
             j=i;
             while(j<s.length)
-            {
+                    {
                 if(!(st.has(s[j])))
                 {
                     st.add(s[j]);

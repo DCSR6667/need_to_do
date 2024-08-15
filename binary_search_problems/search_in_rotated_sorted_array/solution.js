@@ -1,5 +1,83 @@
 /**
- * binary search--O(logn)
+ * time complexity--O(logn+logn)
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number}
+ */
+
+var binary_search=(nums,low,high,target)=>
+    {
+        while(low<=high)
+        {
+            var mid=Math.floor((low+high)/2);
+            if(target==nums[mid])
+            {
+                return mid;
+            }
+            else if(target>nums[mid])
+            {
+                low=mid+1;
+            }
+            else
+            {
+                high=mid-1;
+            }
+        }
+    
+        return -1;
+    
+    };
+    
+    var find_pivot=(nums)=>
+    {
+        var low=0;
+        var high=nums.length-1;
+        while(low<high)
+        {
+            var mid=Math.floor((low+high)/2);
+            if(nums[mid]>nums[mid+1])
+            {
+                return mid;
+            }
+            else if(nums[mid]<nums[mid+1])
+            {
+                if(nums[low]<=nums[mid])
+                {
+                    low=mid+1;
+                }
+                else
+                {
+                    high=mid-1;
+                }
+            }
+        }
+    
+        return low;
+    
+    
+    };
+    
+    var search = function(nums, target) {
+    
+        var low=0;
+        var high=nums.length-1;
+        var pivot=find_pivot(nums);
+       
+        if(target>=nums[low] && target<=nums[pivot])
+        {
+            return binary_search(nums,low,pivot,target);
+        }
+        else
+        {
+            return binary_search(nums,pivot+1,high,target);
+        }
+    
+        
+    };
+
+
+/**
+ * binary search--O(logn+logn)
  * @param {number[]} nums
  * @param {number} target
  * @return {number}

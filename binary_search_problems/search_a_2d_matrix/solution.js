@@ -1,4 +1,44 @@
 /**
+ * time complexity----O(log(m)+log(n))
+ * idea is flatten the array and perform the binary search
+ * 1D index to 2D index conversion has to done
+ * @param {number[][]} matrix
+ * @param {number} target
+ * @return {boolean}
+ */
+var searchMatrix = function(matrix, target) {
+    var rows=matrix.length;
+    var cols=matrix[0].length;
+    var low=0,row,col;
+    var high=rows*cols-1;
+    while(low<=high)
+    {
+        var mid=Math.floor((low+high)/2);
+        row=Math.floor(mid/cols);
+        col=mid%cols;
+        if(matrix[row][col]==target)
+        {
+            return true;
+        }
+        else if(matrix[row][col]>target)
+        {
+            high=mid-1;
+        }
+        else
+        {
+            low=mid+1;
+        }
+    }
+
+    return false;
+    
+};
+
+
+
+
+
+/**
  * this problem can be solved by binary search problem---O(logm+logn)
  * @param {number[][]} matrix
  * @param {number} target
