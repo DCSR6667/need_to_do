@@ -1,5 +1,5 @@
 '''
-this problem can be solved by brute force approach---O(n3)
+this problem can be solved by brute force approach---O(n3+nlogn)
 '''
 
 
