@@ -51,3 +51,41 @@ var rotate = function(nums, k) {
 
     
 };
+
+
+
+
+/**
+ * logic is reversing the array
+ * this problem can be solved by two pointers--O(n/2+n/2)
+ * space complexity--O(1)
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+
+const reverse=(nums,i,j)=>
+    {
+        var temp;
+        while(i<j)
+        {
+            temp=nums[i];
+            nums[i]=nums[j];
+            nums[j]=temp;
+            i+=1;
+            j-=1;
+            
+        }
+    
+    };
+    
+    var rotate = function(nums, k) {
+        var size=nums.length;
+        k=k%size;
+        
+        reverse(nums,0,size-1);
+        
+        reverse(nums,0,k-1);
+        reverse(nums,k,size-1);
+        
+    };
