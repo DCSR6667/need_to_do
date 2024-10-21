@@ -1,3 +1,0 @@
-https://leetcode.com/problems/minimum-interval-to-include-each-query/
-https://leetcode.com/problems/data-stream-as-disjoint-intervals/
-https://leetcode.com/problems/employee-free-time/
