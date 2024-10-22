@@ -39,6 +39,11 @@ var numberOfSubstrings = function(s) {
 
 
 /**
+ * logic---
+ * if i found minimum substring  (this can be done by hashmap with indexes)
+ * then count=count+(lowest index among three chars+1)
+ * 
+ * 
  * this problem can be solved by sliding window pattern--O(n)
  * space complexity--O(1)
  * @param {string} s
