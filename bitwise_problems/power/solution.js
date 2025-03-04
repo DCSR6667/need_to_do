@@ -19,5 +19,5 @@ const power=(base,num)=>
 
     };
 
-console.log(power(2,4));
+console.log(power(2,3));
 

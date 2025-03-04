@@ -2,7 +2,7 @@
  * take the last bit
  * and right shift the number by one 
  * and left shift the last digit by suitable position and add to the result
- * time complexity---O(1)
+ * time complexity---O(32)
  * @param {number} n - a positive integer
  * @return {number} - a positive integer
  */
@@ -21,6 +21,7 @@ var reverseBits = function(n) {
 
     }
     return res>>>0;
+    //converts signed integer to unsigned integer;
     
 
     

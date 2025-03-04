@@ -1,8 +1,11 @@
 /**
  *time complexity----O(n+n)
  * space---O(1)
- * idea identify the bits which differentiate the two numbers
- * based on that bit we can seperate the two numbers
+ * idea identify the right most  set bit which differentiate the two numbers
+ * based on that bit we can store all  numbers in bucket1 and bucket2 and 
+ * definitely we can tell one number will be in bucket1 and one will be in 
+ * bucket2
+ /**
  * @param {number[]} nums
  * @return {number[]}
  */
@@ -18,7 +21,7 @@ var singleNumber = function(nums) {
     }
    
 
-    var mask=(res&(res-1))^res;
+    var mask=(res & -res);
 
     i=0;
     while(i<nums.length)

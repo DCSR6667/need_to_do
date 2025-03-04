@@ -1,296 +1,229 @@
 /**
- * in this question we will concentrate 
- * 1... how many elements we have to take on 
-        * leftside and right side
-        *  res=  1, 2, 3, 4, 6, 7, 8, 9, 10
-            1, 2, 3, 4, 6,| 7, 8, 9, 10
-        * 
-        *  we will figure it out how many elements can be taken
-        * from array1 and array2 on left side
-        * from array1 and array2 on right side
-        * based on this check
-        **** if(l1<=r2 && l2<=r1)
-         {
-                if this is true then  
-                then left part is smaller than right part
-                then we can find out answer
-         }
-          arr1  2,3,6 |7,9
-         arr2   1,4 | 8,10   
-        * 
-        
-       
-
-       
-
-        
-
-        * 
-
+ * this problem can be solved by binary search pattern
+ * low=0
+ * high=minsizedarray.length;
+ * [0,1,2,3]
+ * if i take 0 elements from minsized array
+ * if i take 1 elements from minsized array
+ * if i take 2 elements from minsized array
+ * if i take 3 elements from minsized array
  * 
- *2...always perform binary search on low sized array so that
- we can reduce time complexity 
- *
- * 1,2,3,|4,5,6
- * 1,2|3
+ * why minsized array?
+ * can do on any array but doing binary search on min sized array will be 
+ * beneficial
  * 
  * 
- * time complexity---O(min(logm,logn))
+ * time complexity---O(log(min(m,n)))
  * space complexity--O(1)
+ /**
  * @param {number[]} nums1
  * @param {number[]} nums2
  * @return {number}
  */
 var findMedianSortedArrays = function(nums1, nums2) {
-    var size1=nums1.length;
-    var size2=nums2.length;
-    var total_size=size1+size2;
-    var low=0,high=size1;
-    if(size1>size2)
+    var m=nums1.length,n=nums2.length;
+    var left;
+
+    if(m>n)
     {
         return findMedianSortedArrays(nums2,nums1);
     }
+
+    left=Math.floor((m+n)/2);
+    if((m+n)%2!=0)
+    {
+        left+=1;
+    }
+    var low=0;
+    var high=nums1.length;
     var l1,l2,r1,r2;
-    var left_elements=Math.floor((size1+size2+1)/2);
-    
     while(low<=high)
     {
         var mid1=Math.floor((low+high)/2);
-        var mid2=left_elements-mid1;
-        
-        if(mid1>=size1){ r1=Infinity;}else{r1=nums1[mid1];}
-        if(mid2>=size2){ r2=Infinity;}else{r2=nums2[mid2];}
-        if(mid1-1<0){ l1=Math.log(0);}else{l1=nums1[mid1-1];}
-        if(mid2-1<0){ l2=Math.log(0);}else{l2=nums2[mid2-1];}
+        var mid2=left-mid1;
+        l1=-Infinity,l2=-Infinity,r1=Infinity,r2=Infinity;
+        if(mid1-1>=0) {l1=nums1[mid1-1];}
+        if(mid2-1>=0) {l2=nums2[mid2-1];}
+        if(mid1<m) {r1=nums1[mid1];}
+        if(mid2<n) {r2=nums2[mid2];}
 
-        
         if(l1<=r2 && l2<=r1)
         {
-           
-            if((total_size&1)==0)
+            if((m+n)%2==0)
             {
-            
-               
                 return (Math.max(l1,l2)+Math.min(r1,r2))/2;
 
             }
             else
             {
                 return Math.max(l1,l2);
-
             }
 
         }
-
-        if(l1>r2)
+        else if(l1>r2)
         {
             high=mid1-1;
+
         }
-        else
+        else if(l2>r1)
         {
             low=mid1+1;
+
         }
 
-
     }
-    
+   
+
+
     
 };
 
 
 
 
-
-
 /**
- * time complexity---O(max(size1,size2))
+ * we dont need to merge and store all the elements because they asked median
+ * 1..first find the ind1 and ind2 where our answers needs to store
+ * 2..then based on that maintain the res_ind and find the ind1_ele
+ * and ind2_ele
+ * time conplexity----O(max(m,n))
  * space complexity--O(1)
  * @param {number[]} nums1
  * @param {number[]} nums2
  * @return {number}
  */
 var findMedianSortedArrays = function(nums1, nums2) {
-    var i=0,j=0,count=-1;
-
-    var len=(nums1.length+nums2.length)
-
-    var mid_index=Math.floor((len-1)/2);
-    var isodd,sum=0;
-    if(len%2!=0)
-    {
-        isodd=true;
-    }
-    else
-    {
-        isodd=false;
-    }
-    while(i<nums1.length && j<nums2.length)
+    var m=nums1.length,n=nums2.length;
+    var ind1=Math.floor((m+n-1)/2);
+    var ind2=ind1+1;
+    var ind1_ele,ind2_ele;
+    var i=0,j=0;
+    var res_ind=0;
+    while(i<m && j<n)
     {
         if(nums1[i]<nums2[j])
         {
-            count+=1;
-            if(isodd)
+            if(res_ind==ind1)
             {
-                if(count==mid_index)
-                {
-                    return nums1[i];
-                }
-
+                ind1_ele=nums1[i];
             }
-            else
+            if(res_ind==ind2)
             {
-                if(count==mid_index)
-                {
-                    sum=sum+nums1[i];
-                }
-                if(count==mid_index+1)
-                {
-                    sum=sum+nums1[i];
-                    return sum/2;
-                }
-
+                ind2_ele=nums1[i];
             }
-          
             i+=1;
+            res_ind+=1;
         }
         else
         {
-            count+=1;
-            if(isodd)
+            if(res_ind==ind1)
             {
-                if(count==mid_index)
-                {
-                    return nums2[j];
-                }
-
+                ind1_ele=nums2[j];
             }
-            else
+            if(res_ind==ind2)
             {
-                if(count==mid_index)
-                {
-                    sum=sum+nums2[j];
-                }
-                if(count==mid_index+1)
-                {
-                    sum=sum+nums2[j];
-                    return sum/2;
-                }
-
+                ind2_ele=nums2[j];
             }
-            
             j+=1;
+            res_ind+=1;
+
         }
     }
 
-    while(i<nums1.length)
-    {
-            count+=1;
-            if(isodd)
+        while(i<m)
+        {
+            if(res_ind==ind1)
             {
-                if(count==mid_index)
-                {
-                    return nums1[i];
-                }
-
+                ind1_ele=nums1[i];
             }
-            else
+            if(res_ind==ind2)
             {
-                if(count==mid_index)
-                {
-                    sum=sum+nums1[i];
-                }
-                if(count==mid_index+1)
-                {
-                    sum=sum+nums1[i];
-                    return sum/2;
-                }
-
+                ind2_ele=nums1[i];
             }
-        
-        i+=1;
-    }
+            i+=1;
+            res_ind+=1;
 
-    while(j<nums2.length)
-    {
-            count+=1;
-            if(isodd)
+        }
+
+        while(j<n)
+        {
+            if(res_ind==ind1)
             {
-                if(count==mid_index)
-                {
-                    
-                    return nums2[j];
-                }
-
+                ind1_ele=nums2[j];
             }
-            else
+            if(res_ind==ind2)
             {
-                console.log("hi");
-                if(count==mid_index)
-                {
-                    sum=sum+nums2[j];
-                }
-                if(count==mid_index+1)
-                {
-                    sum=sum+nums2[j];
-                    return sum/2;
-                }
-
+                ind2_ele=nums2[j];
             }
-        
-        j+=1;
-    }
+            j+=1;
+            res_ind+=1;
 
+        }
+
+
+        if((m+n)%2==0)
+        {
+            return (ind1_ele+ind2_ele)/2;
+
+        }
+        else
+        {
+            return ind1_ele;
+
+        }
+
+    
     
 };
 
 
-
 /**
- * time complexity---O(m+n)
- * space complexity--O(m+n)
+ * time complexity----O(max(m,n))
+ * space complexity----O(m+n)
  * @param {number[]} nums1
  * @param {number[]} nums2
  * @return {number}
  */
 var findMedianSortedArrays = function(nums1, nums2) {
-    var res=[];
     var i=0,j=0;
+    var res=[];
     while(i<nums1.length && j<nums2.length)
     {
         if(nums1[i]<nums2[j])
         {
-            res.push(nums1[i]);
+            res.push(nums1[i])
             i+=1;
         }
         else
         {
-            res.push(nums2[j]);
+            res.push(nums2[j])
             j+=1;
         }
     }
-
     while(i<nums1.length)
     {
         res.push(nums1[i]);
-        i+=1;
+        i+=1
     }
-
     while(j<nums2.length)
     {
         res.push(nums2[j]);
-        j+=1;
+        j+=1
     }
 
-    var size=res.length;
-    var low=0;
-    var mid=Math.floor((low+size-1)/2);
-    if(size%2==0)
+    var len=res.length;
+    var mid=Math.floor((0+len-1)/2);
+    if(len%2==0)
     {
         return (res[mid]+res[mid+1])/2;
+
+
+
     }
     else
     {
         return res[mid];
+
     }
     
 };

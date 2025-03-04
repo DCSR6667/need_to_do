@@ -1,6 +1,6 @@
 /**
  * this problem can be solved by bit wise operations ---O(2**n)
- * the idea is take numbers in bitwise representation from 0 to 2**n-1
+ * the idea is take numbers  from 0 to 2**n-1 in bitwise representation
  * and figure out the answers
  * @param {number[]} nums
  * @return {number[][]}

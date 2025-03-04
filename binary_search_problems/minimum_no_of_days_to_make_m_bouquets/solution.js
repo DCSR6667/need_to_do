@@ -5,68 +5,61 @@
  * @param {number} k
  * @return {number}
  */
-var minDays = function(bloomDay, m, k) {
 
-    var low=Math.min(...bloomDay);
-    var high=Math.max(...bloomDay);
-    var ans=-1;
-    
-    while(low<=high)
+var no_of_bouq=(nums,day,k,m)=>
     {
-        var mid=Math.floor((low+high)/2);
-        
-        var j=0;
-        var no_of_bouquets=0;
-        var track_index;
-        
-        while(j<bloomDay.length)
+        var i=0;
+        var count=0;
+        var bouq=0;
+        while(i<nums.length)
         {
-            var a=j;
-            var bloomed_count=0;
-
-            while(a<(j+k))
+            if(bouq==m)
             {
-                if((bloomDay[a]-mid)<=0)
-                {
-                    bloomed_count+=1;
-                }
-                else
-                {
-                    track_index=a;
-                }
-                a+=1;
-
+                return day;
             }
-
-            if(bloomed_count==k)
+            if(day>=nums[i])
             {
-                no_of_bouquets+=1;
-
-                j=j+k;
+                count+=1;
+    
             }
             else
             {
-                j=track_index+1;
-            }   
-          
+                bouq=bouq+Math.floor(count/k);
+                count=0;
+            }
+            i+=1;
         }
-
+        bouq=bouq+Math.floor(count/k);
+        return bouq;
        
-        if(no_of_bouquets>=m)
-        {
-            ans=mid;
-            high=mid-1;
-        }
-        else
-        {
-            low=mid+1;
-        }
-
-    }
-
-    return ans;
+    };
     
-};
+    
+    var minDays = function(bloomDay, m, k) {
+        var low=Math.min(...bloomDay);
+        var high=Math.max(...bloomDay);
+        var ans=-1;
+        if(bloomDay.length<(m*k))
+        {
+            return -1;
+        }
+        while(low<=high)
+        {
+            var mid=Math.floor((low+high)/2);
+            if(no_of_bouq(bloomDay,mid,k,m)>=m)
+            {
+                ans=mid;
+                high=mid-1
+            }
+            else
+            {
+                low=mid+1;
+            }
+           
+        }
+        return ans;
+        
+    };
 
 
 /**
@@ -76,63 +69,58 @@ var minDays = function(bloomDay, m, k) {
  * @param {number} k
  * @return {number}
  */
-var minDays = function(bloomDay, m, k) {
 
-    var i=Math.min(...bloomDay);
-    var n=Math.max(...bloomDay);
-    
-    while(i<=n)
+var no_of_bouq=(nums,day,k,m)=>
     {
-        
-        var j=0;
-        var no_of_bouquets=0;
-        var track_index;
-        
-        while(j<bloomDay.length)
+        var i=0;
+        var count=0;
+        var bouq=0;
+        while(i<nums.length)
         {
-            var a=j;
-            var bloomed_count=0;
-
-            while(a<(j+k))
+            if(bouq==m)
             {
-                if((bloomDay[a]-i)<=0)
-                {
-                    bloomed_count+=1;
-                }
-                else
-                {
-                    track_index=a;
-                }
-                a+=1;
-
+                return day;
             }
-
-            if(bloomed_count==k)
+            if(day>=nums[i])
             {
-                no_of_bouquets+=1;
-                if(no_of_bouquets==m)
-                {
-                    return i;
-                }
-
-                j=j+k;
+                count+=1;
+    
             }
             else
             {
-                j=track_index+1;
-            }   
-          
+                bouq=bouq+Math.floor(count/k);
+                count=0;
+            }
+            i+=1;
         }
-
-
-      
-        
-
+        bouq=bouq+Math.floor(count/k);
+        return bouq;
        
-        i+=1;
-
-    }
-
-    return -1;
     
-};
+        
+    
+    
+       
+    
+    };
+    
+    
+    var minDays = function(bloomDay, m, k) {
+        var low=Math.min(...bloomDay);
+        var high=Math.max(...bloomDay);
+        if(bloomDay.length<(m*k))
+        {
+            return -1;
+        }
+        while(low<=high)
+        {
+            console.log(low,no_of_bouq(bloomDay,low,k));
+            if(no_of_bouq(bloomDay,low,k,m)>=m)
+            {
+                return low;
+            }
+            low+=1;
+        }
+        return -1;
+        
+    };

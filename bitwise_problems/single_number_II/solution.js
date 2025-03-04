@@ -2,7 +2,10 @@
  * this problem can be solved by bitwise operators---O(32*n)
  * space--O(1)
  * the idea is if a number is repeated 3 times then their bits
- * will also repeat 3 times 
+ * will also repeat 3 times so if we count all the bits then 
+ * if it is
+ * divisible by 3 means expected bit is 0
+ * if it is not divisible by 3 then expected bit is 1
  * @param {number[]} nums
  * @return {number}
  */

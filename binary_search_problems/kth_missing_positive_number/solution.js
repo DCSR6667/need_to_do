@@ -44,24 +44,19 @@ var findKthPositive = function(arr, k) {
  * @return {number}
  */
 var findKthPositive = function(arr, k) {
-
-    var i=0,j;
-    var no_of_missing_numbers;
-    while(i<arr.length)
+    var low=0;
+    var high=arr.length-1,j;
+    while(low<=high)
     {
-        no_of_missing_numbers=arr[i]-(i+1);
-        if(no_of_missing_numbers<k)
+        var missing_numbers=arr[low]-(low+1);
+        if(missing_numbers>=k)
         {
-            i+=1;
-        }
-        else
-        {
-            break;
-        }
-    }
+            j=low-1;
+            return k+j+1;
 
-    // arr[j]+(k-(arr[j]-(j+1)))
-    j=i-1;
-    return j+k+1;
-    
+        }
+        low+=1;
+
+    }
+    return k+low;
 };

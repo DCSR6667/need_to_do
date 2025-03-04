@@ -16,7 +16,8 @@
  * };
  */
 
-const binary_search=(target,arr,low,high,asc)=>
+
+ const binary_search=(target,arr,low,high,asc)=>
     {
             
             while(low<=high)
@@ -63,29 +64,36 @@ const binary_search=(target,arr,low,high,asc)=>
     
     const get_peak_index=(arr)=>
     {
-        var low=0;
-        var high=arr.length()-1;
-        while(low<=high)
-        {
-            var mid=Math.floor((low+high)/2);
-            var first=arr.get(mid-1);
-            var middle=arr.get(mid);
-            var last=arr.get(mid+1);
-            if((middle>last) && (middle>=first))
-            {
-                return mid;
-            }
-            else if((middle>last) && (middle<first))
-            {
-                high=mid-1;
-            }
-            else if(middle<=last)
-            {
-                low=mid+1;
-            }
-        }
+       var low=0;
+       var high=arr.length()-1;
+       var prev,next;
+       while(low<high)
+       {
+           var mid=Math.floor((low+high)/2);
+           prev=(mid>0)?arr.get(mid-1):-Infinity;
+           next=(mid<arr.length()-1)?arr.get(mid+1):-Infinity;
+           curr=arr.get(mid);
+        
+           if(curr>prev && curr>next)
+           {
+               return mid;
+           }
+           else if(curr>prev && curr<next)
+           {
+               low=mid+1; 
+           }
+           else if(curr<prev && curr>next)
+           {
+               high=mid-1;
+           }
+           else if(curr<prev && curr<next)
+           {
+               low=mid+1;
+           }
     
-        return -1;
+       }
+       return low;
+       
     
     };
     

@@ -4,4 +4,4 @@ const toggle=(num,i)=>
         return num^mask;
     }
 
-console.log(toggle(4,3));
+console.log(toggle(6,1));

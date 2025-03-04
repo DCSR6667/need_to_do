@@ -1,176 +1,157 @@
 /**
- * in this question we will concentrate 
- * 1... how many elements we have to take on 
-        * leftside and right side
-        *  res=  1, 2, 3, 4, 6, 7, 8, 9, 10
-            1, 2, 3, 4, 6,| 7, 8, 9, 10
-        * 
-        *  we will figure it out how many elements can be taken
-        * from array1 and array2 on left side
-        * from array1 and array2 on right side
-        * based on this check
-        **** if(l1<=r2 && l2<=r1)
-         {
-                if this is true then  
-                then left part is smaller than right part
-                then we can find out answer
-         }
-          arr1  2,3,6 |7,9
-         arr2   1,4 | 8,10   
-        * 
-        
- *2...always perform binary search on low sized array so that
- we can reduce time complexity 
- *
- * 1,2,3,|4,5,6
- * 1,2|3
- * 
- * 
- * time complexity---O(min(logm,logn))
- * space complexity--O(1)*/
+ * this problem can be solved by binary search pattern
+* low=0
+* high=minsizedarray.length;
+* [0,1,2,3]
+* if i take 0 elements from minsized array
+* if i take 1 elements from minsized array
+* if i take 2 elements from minsized array
+* if i take 3 elements from minsized array
+* 
+* why minsized array?
+* can do on any array but doing binary search on min sized array will be 
+* beneficial
+* 
+* 
+* time complexity---O(log(min(m,n)))
+* space complexity--O(1)
+**/
 
-class Solution {
-    kthElement(nums1,nums2,size1,size2,k){ 
-        //code here
-       
-        var total_size=size1+size2;
-        var low=Math.max(k-size2,0),high=Math.min(size1,k);
-        if(size1>size2)
-        {
-            return this.kthElement(nums2,nums1,size2,size1,k);
-        }
-        var l1,l2,r1,r2;
-        var left_elements=k;
+
+ class Solution {
+    kthElement(a, b, k) {
+        // code here
         
+        var m=a.length;
+        var n=b.length;
+        if (a>b)
+        {
+            return this.kthElement(b,a,k);
+        }
+        
+        var low=Math.max(0,k-n);
+        var high=Math.min(k,m);
+        var left=k;
         while(low<=high)
         {
             var mid1=Math.floor((low+high)/2);
-            var mid2=left_elements-mid1;
-            
-            if(mid1>=size1){ r1=Infinity;}else{r1=nums1[mid1];}
-            if(mid2>=size2){ r2=Infinity;}else{r2=nums2[mid2];}
-            if(mid1-1<0){ l1=Math.log(0);}else{l1=nums1[mid1-1];}
-            if(mid2-1<0){ l2=Math.log(0);}else{l2=nums2[mid2-1];}
-    
-            
+            var mid2=left-mid1;
+            var l1=-Infinity,l2=-Infinity,r1=Infinity,r2=Infinity;
+            if(mid1-1>=0) l1=a[mid1-1];
+            if(mid2-1>=0) l2=b[mid2-1];
+            if(mid1<m) r1=a[mid1];
+            if(mid2<n) r2=b[mid2];
             if(l1<=r2 && l2<=r1)
             {
-               
                 return Math.max(l1,l2);
-    
             }
-    
-            if(l1>r2)
+            else if(l1>r2)
             {
                 high=mid1-1;
             }
-            else
+            else if(l2>r1)
             {
                 low=mid1+1;
             }
-    
-    
         }
     }
-        
-        
-    }
-
+}
 
 
 
 // time complexity--O(k)
 // space complexity---O(1)
+
 class Solution {
-    kthElement(A,B,n,m,k){ 
-        //code here
+    kthElement(a, b, k) {
+        // code here
         var i=0,j=0;
-        var count=0,inserted_ele;
-        while(i<n && j<m)
+        var m=a.length,n=b.length;
+        var res_ind=0;
+        while(i<m && j<n)
         {
-            if(A[i]>B[j])
+            if(a[i]<b[j])
             {
-                count+=1;
-                inserted_ele=B[j];
-                
-                j+=1;
-                
+                if(res_ind==k-1)
+                {
+                    return a[i];
+                }
+                i+=1;
+                res_ind+=1;
             }
             else
             {
-                count+=1;
-                inserted_ele=A[i];
+                if(res_ind==k-1)
+                {
+                    return b[j];
+                }
+                j+=1;
+                res_ind+=1;
+                
+                
+            }
+        }
+        
+        while(i<m)
+        {
+             if(res_ind==k-1)
+                {
+                    return a[i];
+                }
                 i+=1;
-            }
+                res_ind+=1;
             
-            if(count==k)
-            {
-                return inserted_ele;
-            }
-        }
-        
-        while(i<n)
-        {
-            count+=1;
-            inserted_ele=A[i];
-            if(count==k)
-            {
-                return inserted_ele;
-            }
-            i+=1;
-        }
-        
-        while(j<m)
-        {
-            count+=1;
-            inserted_ele=B[j];
-            if(count==k)
-            {
-                return inserted_ele;
-            }
             
-            j+=1;
         }
         
-       
+        while(j<n)
+        {
+             if(res_ind==k-1)
+                {
+                    return b[j];
+                }
+                j+=1;
+                res_ind+=1;
+            
+            
+        }
     }
 }
 
 
-// time complexity---O(n+m)
-// space complexity---O(n+m)
+// time complexity---O(max(a,b))
+// space complexity--O(a+b)
 class Solution {
-    kthElement(A,B,n,m,k){ 
-        //code here
-        var i=0,j=0;
+    kthElement(a, b, k) {
+        // code here
         var res=[];
-        while(i<n && j<m)
+        var m=a.length,n=b.length;
+        var i=0,j=0;
+        while(i<m && j<n)
         {
-            if(A[i]>B[j])
+            if(a[i]<b[j])
             {
-                res.push(B[j]);
-                j+=1;
-                
+                res.push(a[i]);
+                i+=1
             }
             else
             {
-                res.push(A[i]);
-                i+=1;
+                res.push(b[j]);
+                j+=1;
             }
         }
         
-        while(i<n)
+        while(i<m)
         {
-            res.push(A[i]);
+            res.push(a[i]);
             i+=1;
         }
-        
-        while(j<m)
+        while(j<n)
         {
-            res.push(res[j]);
+            res.push(b[j]);
             j+=1;
         }
         
-       return res[k-1];
+        return res[k-1];
     }
 }

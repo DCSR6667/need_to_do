@@ -1,41 +1,39 @@
 /**
  * time complexity----O(log(m)+log(n))
  * idea is flatten the array and perform the binary search
- * 1D index to 2D index conversion has to done
+ * convert mid_index to row_index,col_index
+ /**
  * @param {number[][]} matrix
  * @param {number} target
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
-    var rows=matrix.length;
-    var cols=matrix[0].length;
-    var low=0,row,col;
-    var high=rows*cols-1;
+    
+    var low=0;
+    var high=matrix.length*matrix[0].length-1;
+    var mid,row,col;
+    var n=matrix[0].length;
     while(low<=high)
     {
-        var mid=Math.floor((low+high)/2);
-        row=Math.floor(mid/cols);
-        col=mid%cols;
+        mid=Math.floor((low+high)/2);
+        row=Math.floor(mid/n);
+        col=mid%n;
         if(matrix[row][col]==target)
         {
             return true;
         }
-        else if(matrix[row][col]>target)
-        {
-            high=mid-1;
-        }
-        else
+        else if(target>matrix[row][col])
         {
             low=mid+1;
         }
+        else
+        {
+            high=mid-1;
+        }
+        
     }
-
     return false;
-    
 };
-
-
-
 
 
 /**
@@ -44,91 +42,91 @@ var searchMatrix = function(matrix, target) {
  * @param {number} target
  * @return {boolean}
  */
+/**
+ * @param {number[][]} matrix
+ * @param {number} target
+ * @return {boolean}
+ */
 
-const binary_search=(matrix,row,col_start,col_end,target)=>
+var binary_search=(matrix,row,start,end,target)=>
     {
-       
-       while(col_start<=col_end)
-       {
-           var mid=Math.floor((col_start+col_end)/2);
-           if(target==matrix[row][mid])
-           {
-               return true;
-           }
-           else if(target>matrix[row][mid])
-           {
-               col_start=mid+1;
-           }
-           else
-           {
-               col_end=mid-1;
-           }
-   
-       }
-       return false;
-       
-       
-   
+    
+        
+        while(start<=end)
+        {
+            var mid=Math.floor((start+end)/2);
+            if(matrix[row][mid]==target)
+            {
+                return true;
+            }
+            else if(target>matrix[row][mid])
+            {
+                start=mid+1;
+            }
+            else
+            {
+                end=mid-1;
+            }
+        }
+        return false;
+    
     };
-   
-   
-   var searchMatrix = function(matrix, target) {
-       var row_start,row_end,col_start,col_end,row_mid,col_mid;
-       row_start=0;
-       col_start=0
-       row_end=matrix.length-1;
-       col_end=matrix[0].length-1;
-       row_mid=Math.floor((row_start+row_end)/2);
-       col_mid=Math.floor((col_start+col_end)/2);
-       while((row_end-row_start+1)>2)
-       {
-           row_mid=Math.floor((row_start+row_end)/2);
-           col_mid=Math.floor((col_start+col_end)/2);
-           if(matrix[row_mid][col_mid]==target)
-           {
-               return true;
-           }
-           else if(target>matrix[row_mid][col_mid])
-           {
-               row_start=row_mid;
-           }
-           else
-           {
-               row_end=row_mid;
-           }
-   
-       }
-   
-      console.log(row_start,row_end,col_start,col_end,row_mid,col_mid);
-       
-   
-       if(matrix[row_end][col_mid]==target)
-       {
-           return true;
-       }
-       else if(target==matrix[row_start][col_mid])
-       {
-           return true;
-       }
-       else if(target>matrix[row_end][col_mid])
-       {
-           console.log("1");
-           return binary_search(matrix,row_end,col_mid+1,col_end,target);
-       }
-       else if(target>matrix[row_start][col_end] && target<matrix[row_end][col_mid])
-       {
-             console.log("2");
-           return binary_search(matrix,row_end,0,col_mid-1,target);
-       }
-       else if(target>matrix[row_start][col_mid])
-       {
-             console.log("3");
-           return binary_search(matrix,row_start,col_mid+1,col_end,target);
-       }
-       else
-       {
-             console.log("4");
-           return binary_search(matrix,row_start,0,col_mid-1,target);
-       }
-       
-   };
+    
+    
+    var searchMatrix = function(matrix, target) {
+    
+        var low=0;
+        var high=matrix.length-1;
+    
+        if(high-low+1==1)
+        {
+            return binary_search(matrix,low,0,matrix[low].length-1,target);
+        }
+        var col_mid=Math.floor((matrix[0].length-1)/2);
+        while(high-low>1)
+        {
+            var mid=Math.floor((low+high)/2);
+            if(matrix[mid][col_mid]==target)
+            {
+                return true;
+            }
+            else if(target>matrix[mid][col_mid])
+            {
+                low=mid;
+    
+            }
+            else
+            {
+                high=mid;
+    
+            }
+    
+        }
+    
+    
+        if(matrix[low][col_mid]==target)
+        {
+            return true;
+        }
+        else if(matrix[high][col_mid]==target)
+        {
+            return true;
+        }
+        else if(target<matrix[low][col_mid])
+        {
+            return binary_search(matrix,low,0,col_mid-1,target);
+        }
+        else if(target>matrix[high][col_mid])
+        {
+            return binary_search(matrix,high,col_mid+1,matrix[high].length-1,target);
+        }
+        else if(target>matrix[low][col_mid] && target<matrix[high][0])
+        {
+            return binary_search(matrix,low,col_mid+1,matrix[low].length-1,target);
+        }
+        else
+        {
+            return binary_search(matrix,high,0,col_mid-1,target);
+        }
+        
+    };

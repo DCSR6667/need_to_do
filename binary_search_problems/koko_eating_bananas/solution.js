@@ -4,39 +4,43 @@
  * @param {number} h
  * @return {number}
  */
-var minEatingSpeed = function(piles, h) {
-    var low=1;
-    var high=Math.max(...piles);
-    var ans;
-   
-    while(low<=high)
+var calculate_hours=(piles,k)=>
     {
-        var mid=Math.floor((low+high)/2);
-        var j=0;
-        var req_hours=0;
-        while(j<piles.length)
-        {
-            req_hours=req_hours+Math.ceil(piles[j]/mid);
-            j+=1;
-                
-        }
-       
-        if(req_hours<=h)
-        {
-           ans=mid
-            high=mid-1;
-        }
-        else if(req_hours>h)
-        {
-            low=mid+1;
-        }
-       
-
-    }
-
-    return ans;
+        var i=0;
+        var hours=0;
+        while(i<piles.length)
+            {
+                hours=hours+Math.ceil(piles[i]/k);
+                i+=1;
     
-};
+            }
+        return hours;
+    
+    
+    };
+    
+    var minEatingSpeed = function(piles, h) {
+        var low=1;
+        var ans;
+        var high=Math.max(...piles);
+        while(low<=high)
+        {
+            var mid=Math.floor((low+high)/2);
+            if(calculate_hours(piles,mid)<=h)
+            {
+                ans=mid
+                high=mid-1
+            }
+            else
+            {
+                low=mid+1
+            }
+         
+    
+        }
+        return ans;
+        
+    };
 
 
 /**
@@ -46,30 +50,33 @@ var minEatingSpeed = function(piles, h) {
  * @param {number} h
  * @return {number}
  */
-var minEatingSpeed = function(piles, h) {
-    var i=1;
-    var n=Math.max(...piles);
-   
-    while(i<=n)
+var calculate_hours=(piles,k)=>
     {
-        var j=0;
-        var req_hours=0;
-        while(j<piles.length)
-        {
-            req_hours=req_hours+Math.ceil(piles[j]/i);
-            j+=1;
-                
-        }
-       
-        if(req_hours<=h)
-        {
-            return i;
-        }
-        else
-        {
-            i+=1;
-        }
-
-    }
+        var i=0;
+        var hours=0;
+        while(i<piles.length)
+            {
+                hours=hours+Math.ceil(piles[i]/k);
+                i+=1;
     
-};
+            }
+        return hours;
+    
+    
+    };
+    
+    var minEatingSpeed = function(piles, h) {
+        var k=1;
+        var max=Math.max(...piles);
+        while(k<=max)
+        {
+        
+            if(calculate_hours(piles,k)<=h)
+            {
+                return k;
+            }
+            k+=1;
+    
+        }
+        
+    };

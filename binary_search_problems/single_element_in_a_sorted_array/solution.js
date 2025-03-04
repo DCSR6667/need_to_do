@@ -1,3 +1,40 @@
+
+/**
+ * this problem can be solved by binary search pattern--O(logn)
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNonDuplicate = function(arr) {
+    var low=0;
+    var high=arr.length-1;
+
+    while(low<high)
+    {
+        var mid=Math.floor((low+high)/2);
+        var length=(mid-low+1);
+        if((length%2)!=0 && arr[mid]==arr[mid-1])
+        {
+            high=mid-2;
+        }
+        else if((length%2)!=0 && arr[mid]!=arr[mid-1])
+        {
+            low=mid;
+        }
+        else  if((length%2)==0 && arr[mid]==arr[mid-1])
+        {
+            low=mid+1;
+        }
+        else  if((length%2)==0 && arr[mid]!=arr[mid-1])
+        {
+            high=mid-1;
+        }
+
+    }
+    return arr[low];
+    
+};
+
+
 /**
  * this problem can be solved by binary search pattern--O(logn)
  * @param {number[]} nums

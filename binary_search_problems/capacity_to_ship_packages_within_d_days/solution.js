@@ -4,46 +4,74 @@
  * @param {number} days
  * @return {number}
  */
-var shipWithinDays = function(weights, days) {
-    var low=Math.max(...weights);
-    var high = weights.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    var ans;
-    while(low<=high)
+var calculate_required_days=(weights,max_capacity)=>
     {
+        var i=0;
         var sum=0;
-        var req_days=0;
-        var j=0;
-        var mid=Math.floor((low+high)/2);
-        while(j<weights.length)
+        var total_days=0;
+        while(i<weights.length)
         {
-            sum=sum+weights[j];
-            if(sum<=mid)
+            sum=sum+weights[i];
+            if(sum>max_capacity)
             {
-                j+=1;
+                total_days+=1;
+                sum=0;
+    
             }
             else
             {
-                req_days+=1;
-                sum=0;
+                i+=1;
             }
+    
+    
+    
         }
-        
-
-        if((req_days+1)>days)
+        if(sum<=max_capacity)
         {
-            low=mid+1;
-
+            total_days+=1;
         }
-        else
+        return total_days;
+    
+    };
+    
+    var summation=(weights)=>
+    {
+        var sum=0;
+        var i=0;
+        while(i<weights.length)
         {
-            ans=mid;
-            high=mid-1;
+            sum=sum+weights[i];
+            i+=1;
         }
+        return sum;
     }
     
-    return ans;
-};
-
+    
+    var shipWithinDays = function(weights, days) {
+        var low=Math.max(...weights);
+        var high=summation(weights);
+        var ans;
+        while(low<=high)
+        {
+    
+            var mid=Math.floor((low+high)/2); 
+            if(calculate_required_days(weights,mid)<=days)
+            {
+                ans=mid;
+                high=mid-1;
+    
+    
+            }
+            else
+            {
+                low=mid+1;
+            }
+        }
+    
+        return ans;
+    
+        
+    };
 
 
 
@@ -55,34 +83,63 @@ var shipWithinDays = function(weights, days) {
  * @param {number} days
  * @return {number}
  */
-var shipWithinDays = function(weights, days) {
-    var i=Math.max(...weights);
-    var n = weights.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-    while(i<=n)
+
+var calculate_required_days=(weights,max_capacity)=>
     {
+        var i=0;
         var sum=0;
-        var req_days=0;
-        var j=0;
-        while(j<weights.length)
+        var total_days=0;
+        while(i<weights.length)
         {
-            sum=sum+weights[j];
-            if(sum<=i)
+            sum=sum+weights[i];
+            if(sum>max_capacity)
             {
-                j+=1;
+                total_days+=1;
+                sum=0;
+    
             }
             else
             {
-                req_days+=1;
-                sum=0;
+                i+=1;
             }
+    
+    
+    
         }
-        
-
-        if((req_days+1)<=days)
+        if(sum<=max_capacity)
         {
-            return i;
+            total_days+=1;
         }
-        i+=1;
+        return total_days;
+    
+    };
+    
+    const summation=(weights)=>
+    {
+        var sum=0;
+        var i=0;
+        while(i<weights.length)
+        {
+            sum=sum+weights[i];
+            i+=1;
+        }
+        return sum;
     }
     
-};
+    
+    var shipWithinDays = function(weights, days) {
+        var low=Math.max(...weights);
+        var high=summation(weights);
+        while(low<=high)
+        {
+            console.log(low,calculate_required_days(weights,low));
+            if(calculate_required_days(weights,low)<=days)
+            {
+                return low;
+    
+            }
+            low+=1;
+        }
+    
+        
+    };

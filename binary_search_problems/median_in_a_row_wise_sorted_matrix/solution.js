@@ -1,132 +1,109 @@
+// this problem can be solved by bianry search pattern
 // time complexity-----O(log(max_ele-min_ele+1)*(rows*log(cols)))
-class Solution
-{
-    //Function to find median of the matrix.
-    get_min(matrix,rows,cmol)
-    {
-        var i=0;
-        var mini=Infinity;
-        while(i<rows)
-        {
-            if(matrix[i][col]<mini)
-            {
-                mini=matrix[i][col];
-            }
-            i+=1;
-            
-            
-        }
-        return mini;
-        
-    }
+
+class Solution {
+    // Function to find median of the matrix.
     
-    get_max(matrix,rows,col)
+    helper(mat,i,ele)
     {
-        var i=0;
-        var maxi=-Infinity;
-        while(i<rows)
-        {
-            if(matrix[i][col]>maxi)
-            {
-                maxi=matrix[i][col];
-            }
-            i+=1;
-        }
-        return maxi;
-        
-    }
-    
-    count_target(matrix,row,cols,target)
-    {
-        var low=0;
-        var high=cols-1;
-        var ans=-1;
+        var low=0,res=-1;
+        var high=mat[i].length-1;
         while(low<=high)
         {
             var mid=Math.floor((low+high)/2);
-            if(matrix[row][mid]<=target)
+            if(mat[i][mid]<=ele)
             {
-                ans=mid;
+                res=mid;
                 low=mid+1;
+                
             }
             else
             {
                 high=mid-1;
             }
         }
-        return (ans+1);
+        return (res+1);
+        
     }
     
-    
-    helper(matrix,rows,cols,target)
+    get_less_than_equal_to_mid(mat,ele)
     {
         var i=0;
-        var count=0;
-        while(i<rows)
+        var sum=0;
+        while(i<mat.length)
         {
-            
-                
-                var res=this.count_target(matrix,i,cols,target);
-                count=count+res;
-                
-            
+            sum=sum+this.helper(mat,i,ele);
             i+=1;
         }
-       
+        return sum;
         
-        return count;
+        
     }
     
-    
-    median(matrix, R, C)
+    get_min(mat,col)
     {
-        //your code here
-        var low=this.get_min(matrix,R,0);
-        var high=this.get_max(matrix,R,C-1);
-        var count;
-        var half=Math.floor((R*C)/2);
-        var ans;
+        var row=0;
+        var min=Infinity;
+        while(row<mat.length)
+        {
+            if(mat[row][col]<min)
+            {
+                min=mat[row][col];
+                
+            }
+            row+=1;
+        }
+        return min;
+        
+    }
+    
+    get_max(mat,col)
+    {
+        var row=0;
+        var max=-Infinity;
+        while(row<mat.length)
+        {
+            if(mat[row][col]>max)
+            {
+                max=mat[row][col];
+               
+            }
+             row+=1;
+            
+        }
+        return max;
+        
+    }
+    
+   
+    
+    median(mat) {
+        // your code here
+        var m=mat.length;
+        var n=mat[0].length
+        var low=this.get_min(mat,0);
+        var high=this.get_max(mat,n-1)
+        var half=Math.floor((m*n)/2);
+        var count,ans=-1;
         while(low<=high)
         {
             var mid=Math.floor((low+high)/2);
-            count=this.helper(matrix,R,C,mid);
-            if(count>half)
+            count=this.get_less_than_equal_to_mid(mat,mid);
+          
+            
+          
+            
+            if(count<=half)
+            {
+                low=mid+1;
+            }
+            else
             {
                 ans=mid;
                 high=mid-1;
             }
-            else
-            {
-                low=mid+1;
-            }
+            
         }
         return ans;
-    }
-}
-
-
-
-// time complexity----O(m*n+(m*n)log(m*n))
-class Solution
-{
-    //Function to find median of the matrix.
-    median(matrix, R, C)
-    {
-        //your code here
-        var res=[];
-        var i=0;
-        while(i<R)
-        {
-            var j=0;
-            while(j<C)
-            {
-                res.push(matrix[i][j]);
-                j+=1;
-            }
-            i+=1;
-        }
-        
-        res.sort((a, b) => a - b);
-        return res[Math.floor((R*C)/2)];
     }
 }

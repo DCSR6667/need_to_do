@@ -25,5 +25,13 @@ const rmsbits=(num)=>
 
     };
 
+const rmsbits1=(num)=>
+{
+    var res=num&(-num);
+    return res.toString(2);
 
-console.log(rmsbits(-120));
+}
+
+
+console.log(rmsbits(120));
+console.log(rmsbits1(5));
