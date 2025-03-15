@@ -1,9 +1,13 @@
+// User function Template for javascript
+
+/**
+ * this problem can be solved by two pointers--O(n)
+ * @param {Node} head
+ * @param {number} pos
+ * @param {number} data
+ */
+
 /*
-
-this problem can be solved by two pointers problem----O(n)
-space complexity---O(1)
-
-
 class Node{
     constructor(data){
         this.data = data;
@@ -14,26 +18,26 @@ class Node{
 */
 
 class Solution {
-    // Function to insert a new node at given position in doubly linked list.
-    addNode(head, p, x) {
-        // your code here
-        var t1=null;
-        var t2=head;
-        var i=0;
-        while(i<=p)
-        {
-            t1=t2;
-            t2=t2.next
-            i+=1;
-        }
-        var new_node=new Node(x);
-        new_node.next=t2;
-        new_node.prev=t1;
-        t1.next=new_node;
-        if(t2!=null)
-        {
-        t2.prev=new_node;
-        }
-        return head;
+  // Function to insert a new node at given position in doubly linked list.
+  addNode(head, p, x) {
+    // your code here
+    var newnode = new Node(x);
+    if (head == null) {
+      head = newnode;
+      return head;
     }
+    var temp = head,
+      i = 0;
+    while (i < p) {
+      temp = temp.next;
+      i += 1;
+    }
+    if (temp.next != null) {
+      temp.next.prev = newnode;
+    }
+    newnode.next = temp.next;
+    temp.next = newnode;
+    newnode.prev = temp;
+    return head;
+  }
 }

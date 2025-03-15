@@ -12,51 +12,27 @@
  * @param {number} n
  * @return {ListNode}
  */
-
-var length=(head)=>
-    {
-        var temp=head;
-        var count=0;
-        while(temp!=null)
-        {
-            count+=1;
-            temp=temp.next;
-        }
-        return count;
-       
-    
-    };
-    
-    var removeNthFromEnd = function(head, n) {
-    
-        var len=length(head);
-       
-    
-        var pos=len-n;
-    
-        if(pos==0)
-        {
-            return head.next;
-        }
-        var i=1;
-        var temp1=head;
-        while(i<pos)
-        {
-            temp1=temp1.next;
-            i+=1;
-    
-        }
-        
-    
-        var temp2=temp1.next;
-        temp1.next=temp2.next;
-    
-        return head;
-    
-        
-    };
-
-
+var len = (head) => {
+  var temp = head;
+  var count = 0;
+  while (temp != null) {
+    count += 1;
+    temp = temp.next;
+  }
+  return count;
+};
+var removeNthFromEnd = function (head, n) {
+  var pos = len(head) - n;
+  var i = 1;
+  var dummy = new ListNode(0, head);
+  var temp = dummy;
+  while (i <= pos) {
+    temp = temp.next;
+    i += 1;
+  }
+  temp.next = temp.next.next;
+  return dummy.next;
+};
 
 /**
  * 
@@ -78,27 +54,19 @@ slow pointer will  before of deleting node
  * @param {number} n
  * @return {ListNode}
  */
-var removeNthFromEnd = function(head, n) {
-
-    
-    var slow=head,fast=head;
-    var i=1;
-    while(i<=n)
-    {
-        fast=fast.next;
-        i+=1;
-    }
-    if(fast==null)
-    {
-        return head.next;
-    }
-    while(fast.next!=null)
-    {
-        slow=slow.next;
-        fast=fast.next;
-    }
-    var temp=slow.next;
-    slow.next=temp.next;
-    return head;
-    
+var removeNthFromEnd = function (head, n) {
+  var dummy = new ListNode(0, head);
+  var i = 1;
+  var slow = dummy,
+    fast = dummy;
+  while (i <= n) {
+    fast = fast.next;
+    i += 1;
+  }
+  while (fast.next != null) {
+    slow = slow.next;
+    fast = fast.next;
+  }
+  slow.next = slow.next.next;
+  return dummy.next;
 };

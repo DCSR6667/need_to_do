@@ -5,25 +5,26 @@
  */
 var maxArea = function(height) {
     var i=0;
-    var max_area=Math.log(0);
-    var area;
+    var area,w,h,max=-Infinity;
     while(i<height.length)
     {
         var j=i+1;
         while(j<height.length)
         {
-            area=(j-i)*(Math.min(height[i],height[j]));
-      
-            if(area>max_area)
+            w=(j-i);
+            h=Math.min(height[i],height[j]);
+            area=w*h;
+            if(area>max)
             {
-                max_area=area;
-             
+                max=area;
             }
             j+=1;
+
         }
         i+=1;
     }
-    return max_area;
+
+    return max;
     
 };
 

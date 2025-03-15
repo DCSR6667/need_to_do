@@ -1,6 +1,6 @@
 /**
  * this problem can be solved by fast and slow pointers and inplace
- * reversal---O(n+n/2)==O(n)
+ * reversal---O(n/2+n/2+n/2)==O(n)
  * space complexity-O(1)
  * 
  * logic---
@@ -19,45 +19,37 @@
  * @param {ListNode} head
  * @return {number}
  */
-var pairSum = function(head) {
-    var slow=head,fast=head;
-    while(fast!=null && fast.next!=null)
-    {
-        slow=slow.next;
-        fast=fast.next.next;
-    }
-    var prev=null,curr=slow,nex=curr.next;
-    while(curr!=null)
-    {
-        curr.next=prev;
-        prev=curr;
-        curr=nex;
-        if(curr!=null)
-        {
-            nex=curr.next;
-        }
-    }
+var pairSum = function (head) {
+  var slow = head,
+    fast = head;
+  while (fast != null && fast.next != null) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
 
-    var tail=prev,first=head;
-    var max_sum=-Infinity;
-    var sum;
-    while(tail!=null)
-    {
-        sum=first.val+tail.val;
-        if(sum>max_sum)
-        {
-            max_sum=sum;
-        }
-        first=first.next;
-        tail=tail.next;
-
-
+  var max_sum = -Infinity,
+    prev = null,
+    nex = slow.next;
+  while (slow != null) {
+    slow.next = prev;
+    prev = slow;
+    slow = nex;
+    if (nex != null) {
+      nex = nex.next;
     }
-    return max_sum;
-    
+  }
+  slow = head;
+  var sum;
+  while (prev != null) {
+    sum = prev.val + slow.val;
+    if (sum > max_sum) {
+      max_sum = sum;
+    }
+    prev = prev.next;
+    slow = slow.next;
+  }
+  return max_sum;
 };
-
-
 
 /**
  * 
@@ -81,38 +73,31 @@ var pairSum = function(head) {
  * @param {ListNode} head
  * @return {number}
  */
-var pairSum = function(head) {
-    var slow=head,fast=head,nex=slow.next;
-    prev=null;
+var pairSum = function (head) {
+  var slow = head,
+    fast = head,
+    prev = null,
+    nex = slow.next,
+    max_sum = -Infinity;
 
-
-    while(fast!=null && fast.next!=null)
-    {
-        fast=fast.next.next;
-        slow.next=prev;
-        prev=slow;
-        slow=nex;
-        nex=nex.next;
-        
+  while (fast != null) {
+    fast = fast.next.next;
+    slow.next = prev;
+    prev = slow;
+    slow = nex;
+    if (nex != null) {
+      nex = nex.next;
     }
+  }
 
-      
-
-
-    var max_sum=-Infinity;
-    var sum;
-    while(prev!=null && slow!=null)
-    {
-        sum=prev.val+slow.val;
-        if(sum>max_sum)
-        {
-            max_sum=sum;
-        }
-        prev=prev.next;
-        slow=slow.next;
-
-
+  var sum;
+  while (slow != null) {
+    sum = slow.val + prev.val;
+    if (sum > max_sum) {
+      max_sum = sum;
     }
-    return max_sum;
-    
+    slow = slow.next;
+    prev = prev.next;
+  }
+  return max_sum;
 };

@@ -20,42 +20,44 @@
  * @param {ListNode} head
  * @return {void} Do not return anything, modify head in-place instead.
  */
-var reorderList = function(head) {
-    var slow=head,fast=head;
-    while(fast!=null && fast.next!=null)
-    {
-        slow=slow.next;
-        fast=fast.next.next;
-    }
-
-    
-
-    var prev=null,curr=slow,nex=curr.next;
-    while(curr!=null)
-    {
-        curr.next=prev;
-        prev=curr;
-        curr=nex;
-        if(curr!=null)
-        {
-            nex=curr.next;
-
-        }
-        
-    }
-
-    
-
-    var last=prev,lastb=last.next,first=head,second=first.next;
-    while(lastb!=null)
-    {
-        first.next=last;
-        last.next=second;
-        first=second;
-        second=second.next;
-        last=lastb;
-        lastb=lastb.next;
-    }
+var reorderList = function (head) {
+  if (head == null || head.next == null) {
     return head;
-    
+  }
+
+  var slow = head,
+    fast = head;
+  while (fast != null && fast.next != null) {
+    slow = slow.next;
+    fast = fast.next.next;
+  }
+
+  var prev = null,
+    nex = slow.next;
+  while (slow != null) {
+    slow.next = prev;
+    prev = slow;
+    slow = nex;
+    if (nex != null) {
+      nex = nex.next;
+    }
+  }
+
+  var a = head,
+    b = a.next,
+    c = prev,
+    d = c.next;
+  while (d != null) {
+    a.next = c;
+    c.next = b;
+    a = b;
+    if (b != null) {
+      b = b.next;
+    }
+    c = d;
+    if (d != null) {
+      d = d.next;
+    }
+  }
+  return head;
 };

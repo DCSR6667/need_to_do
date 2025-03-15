@@ -15,37 +15,27 @@
  */
 
 class Solution {
-    reverseDLL(head) {
-        // code here
-        
-        if(head==null || head.next==null)
-        {
-            return head;
-        }
-        
-        var prev=null;
-        var curr=head;
-        var nex=curr.next;
-        
-        while(curr!=null)
-        {
-            curr.next=prev;
-            curr.prev=nex;
-            prev=curr;
-            curr=nex;
-            if(nex!=null)
-            {
-                nex=nex.next;
-            }
-        }
-        
-        return prev;
+  reverseDLL(head) {
+    // code here
+    if (head == null || head.next == null) {
+      return head;
     }
+
+    var curr = head,
+      prev = null,
+      nex = curr.next;
+    while (curr != null) {
+      curr.next = prev;
+      curr.prev = nex;
+      prev = curr;
+      curr = nex;
+      if (nex != null) {
+        nex = nex.next;
+      }
+    }
+    return prev;
+  }
 }
-
-
-
-
 
 /*class DLLNode {
     constructor(val) {
@@ -64,22 +54,19 @@ class Solution {
  */
 
 class Solution {
-    reverseDLL(head) {
-        // code here
-        if(head==null || head.next==null)
-        {
-            return head;
-        }
-        
-        var curr=head,temp;
-        while(curr!=null)
-        {
-            temp=curr.prev;
-            curr.prev=curr.next;
-            curr.next=temp;
-            curr=curr.prev;
-        }
-        
-        return temp.prev;
+  reverseDLL(head) {
+    // code here
+    var curr = head,
+      temp;
+    while (curr != null) {
+      temp = curr.next;
+      curr.next = curr.prev;
+      curr.prev = temp;
+      if (curr.prev == null) {
+        head = curr;
+      }
+      curr = curr.prev;
     }
+    return head;
+  }
 }

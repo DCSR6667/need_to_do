@@ -1,37 +1,37 @@
 /**
- * this problem can be solved by brute force approch--O(n+m)
+ * this problem can be solved by brute force approch--O(n+m+max(len(a),len(b)))
  * space--O(m+n)
- * @param {string[]} word1
- * @param {string[]} word2
- * @return {boolean}
  */
 var arrayStringsAreEqual = function(word1, word2) {
-    var i=0;
     var a="";
     var b="";
+    var i=0;
     while(i<word1.length)
     {
         a=a+word1[i];
         i+=1;
-
     }
-    
-    var j=0;
-    while(j<word2.length)
+    var i=0;
+    while(i<word2.length)
     {
-        b=b+word2[j];
+        b=b+word2[i];
+        i+=1;
+    }
+    var i=0,j=0;
+    while(i<a.length && j<b.length)
+    {
+        if(a[i]!=b[j])
+        {
+            return false;
+        }
+        i+=1;
         j+=1;
     }
-
-    if(a==b)
-    {
-        return true;
-    }
-    else
+    if(i<a.length || j<b.length)
     {
         return false;
     }
-    
+    return true;
 };
 
 
@@ -41,40 +41,40 @@ var arrayStringsAreEqual = function(word1, word2) {
 /**
  * this problem can be solved by two pointers approach---O(m+n)
  * space--O(1)
+ /**
  * @param {string[]} word1
  * @param {string[]} word2
  * @return {boolean}
  */
 var arrayStringsAreEqual = function(word1, word2) {
 
-    var i=0,j=0,c1=0,c2=0;
+    var i=0;
+    var j=0;
+    var a=0,b=0;
     while(i<word1.length && j<word2.length)
     {
-        if(word1[i][c1]!=word2[j][c2])
+        if(word1[i][a]!=word2[j][b])
         {
             return false;
         }
-        c1+=1;
-        c2+=1;
-        if(c1==word1[i].length)
+        a+=1;
+        b+=1;
+        if(a==word1[i].length)
         {
+            a=0;
             i+=1;
-            c1=0;
         }
-
-        if(c2==word2[j].length)
+        if(b==word2[j].length)
         {
+            b=0;
             j+=1;
-            c2=0;
         }
 
     }
-
     if(i<word1.length || j<word2.length)
     {
         return false;
     }
-
     return true;
     
 };

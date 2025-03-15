@@ -1,7 +1,7 @@
 /**
  * this problem can be solved by two pointers approach--O(max(m,n))
  * space complexity---O(max(m,n))
- * 
+ *
  * Definition for singly-linked list.
  * function ListNode(val, next) {
  *     this.val = (val===undefined ? 0 : val)
@@ -13,38 +13,48 @@
  * @param {ListNode} l2
  * @return {ListNode}
  */
-var addTwoNumbers = function(l1, l2) {
-    var dummy=new ListNode(0);
-    var tail=dummy;
-    var sum,carry=0,rem,new_node,val1,val2;
-    while(l1!=null || l2!=null)
-    {
-        val1=(l1!=null)?l1.val:0;
-        val2=(l2!=null)?l2.val:0;
-        sum=val1+val2+carry;
-        carry=Math.floor(sum/10);
-        rem=sum%10;
-        new_node=new ListNode(rem);
-        tail.next=new_node;
-        tail=tail.next;
-        if(l1!=null)
-        {
-            l1=l1.next;
-        }
-        if(l2!=null)
-        {
-            l2=l2.next;
-        }
+var addTwoNumbers = function (l1, l2) {
+  var dummy = new ListNode(0);
+  var tail = dummy;
+  var temp1 = l1,
+    temp2 = l2;
+  var carry = 0,
+    sum,
+    val,
+    n;
+  while (temp1 != null && temp2 != null) {
+    sum = temp1.val + temp2.val + carry;
+    val = sum % 10;
+    carry = Math.floor(sum / 10);
+    n = new ListNode(val, null);
+    tail.next = n;
+    tail = tail.next;
+    temp1 = temp1.next;
+    temp2 = temp2.next;
+  }
+  while (temp1 != null) {
+    sum = temp1.val + carry;
+    val = sum % 10;
+    carry = Math.floor(sum / 10);
+    n = new ListNode(val, null);
+    tail.next = n;
+    tail = tail.next;
+    temp1 = temp1.next;
+  }
 
-    }
-
-    if(carry!=0)
-    {
-        new_node=new ListNode(carry);
-        tail.next=new_node;
-        tail=tail.next;
-    }
-
-    return dummy.next;
-    
+  while (temp2 != null) {
+    sum = temp2.val + carry;
+    val = sum % 10;
+    carry = Math.floor(sum / 10);
+    n = new ListNode(val, null);
+    tail.next = n;
+    tail = tail.next;
+    temp2 = temp2.next;
+  }
+  if (carry != 0) {
+    n = new ListNode(carry, null);
+    tail.next = n;
+    tail = tail.next;
+  }
+  return dummy.next;
 };

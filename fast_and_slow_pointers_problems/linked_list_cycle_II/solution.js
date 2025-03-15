@@ -1,7 +1,7 @@
 /**
  * this problem can be solved by hash set--O(n)
  * space complexity---O(n)
- * 
+ *
  * Definition for singly-linked list.
  * function ListNode(val) {
  *     this.val = val;
@@ -13,27 +13,18 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-var detectCycle = function(head) {
-    var temp=head;
-    var s=new Set();
-    while(temp!=null)
-    {
-        if(!(s.has(temp)))
-        {
-            s.add(temp);
-        }
-        else
-        {
-            return temp;
-        }
-        temp=temp.next;
+var detectCycle = function (head) {
+  var hs = new Set();
+  var temp = head;
+  while (temp != null) {
+    if (hs.has(temp)) {
+      return temp;
     }
-    return null;
-    
+    hs.add(temp);
+    temp = temp.next;
+  }
+  return null;
 };
-
-
-
 
 /**
  * 
@@ -58,26 +49,20 @@ var detectCycle = function(head) {
  * @param {ListNode} head
  * @return {ListNode}
  */
-var detectCycle = function(head) {
-    var slow=head,fast=head;
-    while(fast!=null && fast.next!=null)
-    {
-        slow=slow.next;
-        fast=fast.next.next;
-        if(slow==fast)
-        {
-            var temp=head;
-            while(temp!=fast)
-            {
-                temp=temp.next;
-                fast=fast.next;
-        
-            }
-            return temp;
-
-        }
+var detectCycle = function (head) {
+  var slow = head,
+    fast = head;
+  while (fast != null && fast.next != null) {
+    slow = slow.next;
+    fast = fast.next.next;
+    if (slow == fast) {
+      var temp = head;
+      while (temp != fast) {
+        temp = temp.next;
+        fast = fast.next;
+      }
+      return temp;
     }
-    return null;
-
-    
+  }
+  return null;
 };
