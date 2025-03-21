@@ -5,33 +5,24 @@
  * @param {number} k
  * @return {number}
  */
-var maxScore = function(cardPoints, k) {
-    var l=0,sum=0,max_sum,r;
-    while(l<k)
-    {
-        sum=sum+cardPoints[l];
-        l+=1;
-
+var maxScore = function (cardPoints, k) {
+  var i = 0,
+    sum = 0;
+  while (i < k) {
+    sum = sum + cardPoints[i];
+    i += 1;
+  }
+  var max_sum = sum;
+  var j = k - 1,
+    m = cardPoints.length - 1;
+  while (j >= 0) {
+    sum = sum - cardPoints[j];
+    sum = sum + cardPoints[m];
+    if (sum > max_sum) {
+      max_sum = sum;
     }
-    max_sum=sum;
-
-    l=l-1;
-    r=cardPoints.length-1;
-    while(l>=0)
-    {
-        sum=sum-cardPoints[l];
-        l-=1;
-        sum=sum+cardPoints[r];
-        r-=1
-
-        if(sum>max_sum)
-        {
-            max_sum=sum;
-        }
-    }
-
-    return max_sum;
-
-
-    
+    j -= 1;
+    m -= 1;
+  }
+  return max_sum;
 };

@@ -1,9 +1,9 @@
 /**
- * 
+ *
  * this problem can be solved by two pointers---O(n)
  * space complexity----O(1)
- * 
- * 
+ *
+ *
  * Definition for singly-linked list.
  * function ListNode(val, next) {
  *     this.val = (val===undefined ? 0 : val)
@@ -11,37 +11,35 @@
  * }
  */
 
-
 /**
  * @param {ListNode} head
  * @param {number} x
  * @return {ListNode}
  */
 
-
-var partition = function(head, x) {
-    var temp=head;
-    var dummy_left=new ListNode(0),left=dummy_left;
-    var dummy_right=new ListNode(0),right=dummy_right;
-    while(temp!=null)
-    {
-        if(temp.val<x)
-        {
-            left.next=temp;
-            left=temp;
-            temp=temp.next;
-            left.next=null;
-        }
-        else
-        {
-            right.next=temp;
-            right=temp;
-            temp=temp.next;
-            right.next=null;
-        }
+var partition = function (head, x) {
+  if (head == null) {
+    return head;
+  }
+  var dummy_1 = new ListNode(-1),
+    tail_1 = dummy_1;
+  var dummy_2 = new ListNode(-1),
+    tail_2 = dummy_2;
+  var temp = head;
+  while (temp != null) {
+    if (temp.val < x) {
+      tail_1.next = temp;
+      tail_1 = temp;
+      temp = temp.next;
+    } else {
+      tail_2.next = temp;
+      tail_2 = temp;
+      temp = temp.next;
     }
-    left.next=dummy_right.next;
-    return dummy_left.next;
+  }
 
-    
+  tail_1.next = dummy_2.next;
+  tail_2.next = null;
+
+  return dummy_1.next;
 };

@@ -1,4 +1,3 @@
-
 /*
 this problem can be solved by using inplace reveral--O(n+n+n)
 space complexity---O(1)
@@ -15,55 +14,51 @@ This is method only submission.
 You only need to complete the below method.
 */
 
-class Solution 
-{
+class Solution {
+  addOne(node) {
+    // your code here
+    var curr = node,
+      prev = null,
+      nex = curr.next;
+    while (curr != null) {
+      curr.next = prev;
+      prev = curr;
+      curr = nex;
+      if (nex != null) {
+        nex = nex.next;
+      }
+    }
 
-    reverse(node)
-    {
-        if(node==null || node.next==null)
-        {
-            return node;
-            
-        }
-        var prev=null,nex=node.next;
-        while(node!=null)
-        {
-            node.next=prev;
-            prev=node;
-            node=nex;
-            if(nex!=null)
-            {
-                nex=nex.next;
-            }
-        }
-        
-        return prev;
-        
+    var temp = prev,
+      mod,
+      carry = 1,
+      sum;
+    while (prev != null) {
+      sum = prev.data + carry;
+      mod = sum % 10;
+      carry = Math.floor(sum / 10);
+
+      prev.data = mod;
+      prev = prev.next;
     }
-    addOne(node) {
-        // your code here
-        var new_head=this.reverse(node);
-        
-        var carry=1,temp=new_head;
-        
-        while(temp!=null && carry!=0)
-        {
-            var sum=temp.data+carry;
-            var rem=sum%10;
-            var carry=Math.floor(sum/10);
-            temp.data=rem;
-            temp=temp.next;
-            
-        }
-        node=this.reverse(new_head);
-        if(carry!=0)
-        {
-            var new_node=new Node(1);
-            new_node.next=node;
-            node=new_node;
-        }
-        return node;
-        
-        
+
+    (curr = temp), (prev = null), (nex = curr.next);
+
+    while (curr != null) {
+      curr.next = prev;
+      prev = curr;
+      curr = nex;
+      if (nex != null) {
+        nex = nex.next;
+      }
     }
+
+    if (carry != 0) {
+      var newnode = new Node(carry);
+      newnode.next = prev;
+      prev = newnode;
+    }
+
+    return prev;
+  }
 }

@@ -1,5 +1,5 @@
 /**
- * time complexity---O(max(n,k))
+ * time complexity---O(n+n)
  * space complexity----O(1)
  * logic
  * ----------------------------
@@ -21,46 +21,38 @@
  * @param {number} k
  * @return {ListNode[]}
  */
-var splitListToParts = function(head, k) {
-    var temp=head;
-    var length=0;
-    while(temp!=null)
-    {
-        length+=1;
-        temp=temp.next;
+var length = (temp) => {
+  var count = 0;
+  while (temp != null) {
+    count += 1;
+    temp = temp.next;
+  }
+  return count;
+};
+var splitListToParts = function (head, k) {
+  var i = 1,
+    len = length(head);
+  var actual_nodes_in_a_part = Math.floor(len / k);
+  var extra_nodes = len % k;
+  var temp = head,
+    prev = null;
+  var arr = [];
+  while (i <= k) {
+    var total_no_of_nodes_in_a_part =
+      actual_nodes_in_a_part + (extra_nodes > 0 ? 1 : 0);
+    extra_nodes -= 1;
+    arr.push(temp);
+
+    var j = 1;
+    while (temp != null && j <= total_no_of_nodes_in_a_part) {
+      prev = temp;
+      temp = temp.next;
+      j += 1;
     }
-    
-    
-    var res=[];
-    var actual_nodes_in_a_part=Math.floor(length/k);
-    var extra_nodes=length%k;
-    var curr=head,prev=null;
-    var j=1;
-    while(j<=k)
-    {
-        res.push(curr);
-        var total_no_of_nodes_in_a_part=actual_nodes_in_a_part+(extra_nodes>0?1:0);
-        extra_nodes-=1;
-        var i=1;
-        
-        while(i<=total_no_of_nodes_in_a_part)
-        {
-            prev=curr;
-            curr=curr.next;
-
-            i+=1;
-        }
-    if(prev!=null)
-    {
-         prev.next=null;
-
+    if (prev != null) {
+      prev.next = null;
     }
-   
-    j+=1;
-      
-
-    }
-
-    return res;
-      
+    i += 1;
+  }
+  return arr;
 };

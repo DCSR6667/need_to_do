@@ -4,48 +4,27 @@
  * @param {string} s
  * @return {number}
  */
-var lengthOfLongestSubstring = function(s) {
-    var max_len=-Infinity,i=0;
-    while(i<s.length)
-    {
-        var j=i;
-        var hs=new Set();
-        while(j<s.length)
-        {
-            if(!(hs.has(s[j])))
-            {
-                hs.add(s[j]);
-
-            }
-            else
-            {
-                break;
-            }
-            if((j-i+1)>max_len)
-            {
-                max_len=(j-i+1);
-            }
-
-            j+=1;
+var lengthOfLongestSubstring = function (s) {
+  var i = 0,
+    longest = 0;
+  while (i < s.length) {
+    var j = i;
+    var st = new Set();
+    while (j < s.length) {
+      if (!st.has(s[j])) {
+        st.add(s[j]);
+        if (j - i + 1 > longest) {
+          longest = j - i + 1;
         }
-        i+=1;
+        j += 1;
+      } else {
+        break;
+      }
     }
-
-    if(max_len>0)
-    {
-        return max_len;
-    }
-    else
-    {
-        return 0;
-    }
-
-    
+    i += 1;
+  }
+  return longest;
 };
-
-
-
-
 
 /**
  * this problem can be solved by using sliding window--O(n+n)
@@ -53,40 +32,26 @@ var lengthOfLongestSubstring = function(s) {
  * @param {string} s
  * @return {number}
  */
-var lengthOfLongestSubstring = function(s) {
-    var l=0,r=0,max_len=-Infinity;
-    var hs=new Set();
-    while(r<s.length)
-    {
-        while(hs.has(s[r]))
-        {
-            hs.delete(s[l]);
-            l+=1;
-        }
-
-        hs.add(s[r]);
-        if((r-l+1)>max_len)
-        {
-            max_len=(r-l+1);
-        }
-        r+=1;
-
+var lengthOfLongestSubstring = function (s) {
+  var l = 0,
+    r = 0,
+    longest = 0;
+  var hs = new Set();
+  while (r < s.length) {
+    while (hs.has(s[r])) {
+      hs.delete(s[l]);
+      l += 1;
     }
 
-    if(max_len>0)
-    {
-        return max_len;
+    hs.add(s[r]);
+    if (r - l + 1 > longest) {
+      longest = r - l + 1;
     }
-    else
-    {
-        return 0;
-    }
-    
+    r += 1;
+  }
+
+  return longest;
 };
-
-
-
-
 
 /**
  * this problem can be solved by using sliding window--O(n)
@@ -94,39 +59,23 @@ var lengthOfLongestSubstring = function(s) {
  * @param {string} s
  * @return {number}
  */
-var lengthOfLongestSubstring = function(s) {
-    var l=0,r=0,max_len=-Infinity;
-    var hs=new Set();
-    while(r<s.length)
-    {
-        if(hs.has(s[r]))
-        {
-            hs.delete(s[l]);
-            l+=1;
-        }
-
-        if(!(hs.has(s[r])))
-        {
-            hs.add(s[r]);
-            if((r-l+1)>max_len)
-            {
-                max_len=(r-l+1);
-            }
-            r+=1;
-
-        }
-
-        
-
+var lengthOfLongestSubstring = function (s) {
+  var l = 0,
+    r = 0,
+    longest = 0;
+  var hm = new Map();
+  while (r < s.length) {
+    if (hm.has(s[r])) {
+      if (hm.get(s[r]) >= l) {
+        l = hm.get(s[r]) + 1;
+      }
     }
 
-    if(max_len>0)
-    {
-        return max_len;
+    if (r - l + 1 > longest) {
+      longest = r - l + 1;
     }
-    else
-    {
-        return 0;
-    }
-    
+    hm.set(s[r], r);
+    r += 1;
+  }
+  return longest;
 };
