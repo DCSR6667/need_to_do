@@ -4,30 +4,23 @@
  * @param {number[]} nums
  * @return {number}
  */
-var maxSubArray = function(nums) {
-    var max_sum=-Infinity,i=0;
-    while(i<nums.length)
-    {
-        var j=i;
-        var sum=0;
-        while(j<nums.length)
-        {
-            sum=sum+nums[j];
-            if(sum>max_sum)
-            {
-                max_sum=sum;
-            }
-            j+=1;
-
-        }
-        i+=1;
+var maxSubArray = function (nums) {
+  var i = 0,
+    max_sum = -Infinity;
+  while (i < nums.length) {
+    var j = i,
+      sum = 0;
+    while (j < nums.length) {
+      sum = sum + nums[j];
+      if (sum > max_sum) {
+        max_sum = sum;
+      }
+      j += 1;
     }
-    return max_sum;
-    
+    i += 1;
+  }
+  return max_sum;
 };
-
-
-
 
 /**
  * this problem can be solved by sliding window--O(n)
@@ -35,23 +28,19 @@ var maxSubArray = function(nums) {
  * @param {number[]} nums
  * @return {number}
  */
-var maxSubArray = function(nums) {
-    var max_sum=-Infinity,r=0,sum=0;
-    while(r<nums.length)
-    {
-        sum=sum+nums[r];
-        if(sum>max_sum)
-        {
-            max_sum=sum;
-        }
-        if(sum<0)
-        {
-            sum=0;
-        }
-        r+=1;
-
+var maxSubArray = function (nums) {
+  var max_sum = -Infinity,
+    r = 0,
+    sum = 0;
+  while (r < nums.length) {
+    sum = sum + nums[r];
+    if (sum > max_sum) {
+      max_sum = sum;
     }
-    return max_sum;
-    
-
+    if (sum < 0) {
+      sum = 0;
+    }
+    r += 1;
+  }
+  return max_sum;
 };
