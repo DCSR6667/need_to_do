@@ -86,40 +86,43 @@ class Node{
     }
 }
 */
-
 class Solution {
     // Function to sort a linked list of 0s, 1s and 2s.
     segregate(head) {
         // your code here
-        var dummy_0=new Node(-1),temp_0=dummy_0
-        var dummy_1=new Node(-1),temp_1=dummy_1;
-        var dummy_2=new Node(-1),temp_2=dummy_2;
-        
-        while(head!=null)
+        var dummy_0=new Node(-1);
+        var dummy_1=new Node(-1);
+        var dummy_2=new Node(-1);
+        var tail_0=dummy_0,tail_1=dummy_1,tail_2=dummy_2;
+        var temp=head;
+        while(temp!=null)
         {
-            var new_node=new Node(head.data);
-            if(head.data==0)
+            if(temp.data==0)
             {
-                temp_0.next=new_node;
-                temp_0=new_node;
+                tail_0.next=temp;
+                temp=temp.next;
+                tail_0=tail_0.next;
                 
             }
-            else if(head.data==1)
+            else if(temp.data==1)
             {
-                temp_1.next=new_node;
-                temp_1=new_node;
+                tail_1.next=temp;
+                temp=temp.next;
+                tail_1=tail_1.next;
+                
             }
             else
             {
-                temp_2.next=new_node;
-                temp_2=new_node;
+                tail_2.next=temp;
+                temp=temp.next;
+                tail_2=tail_2.next;
+                
             }
-            head=head.next;
+            
         }
-        
-        temp_0.next=(dummy_1.next!=null)?dummy_1.next:dummy_2.next;
-        temp_1.next=dummy_2.next;
-        
+        tail_0.next=(dummy_1!=tail_1)?dummy_1.next:dummy_2.next;
+        tail_1.next=dummy_2.next;
+        tail_2.next= null;f
         return dummy_0.next;
     }
 }

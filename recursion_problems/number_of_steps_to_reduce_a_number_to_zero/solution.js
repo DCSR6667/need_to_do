@@ -2,48 +2,36 @@
  * @param {number} num
  * @return {number}
  */
-var numberOfSteps = function(num) {
-    var count=0;
-    while(num>0)
-    {
-        if(num%2==0)
-        {
-            num=Math.floor(num/2);
-            count+=1;
-        }
-        else
-        {
-            num=num-1;
-            count+=1;
-        }
-
+var numberOfSteps = function (num) {
+  var count = 0;
+  while (num > 0) {
+    count += 1;
+    if (num % 2 == 0) {
+      num = Math.floor(num / 2);
+    } else {
+      num = num - 1;
     }
-    return count;
-    
+  }
+  return count;
 };
-
-
-
 
 /**
  * @param {number} num
  * @return {number}
  */
-var numberOfSteps = function(num) {
-    if(num==0)
-    {
-        return 0;
-    }
-    var count=1;
-    if(num%2==0)
-    {
-        var f=numberOfSteps(Math.floor(num/2));
-        return f+count;
-    }
-    else
-    {
-        var s=numberOfSteps(num-1);
-        return s+count;
-    }
-
+var numberOfSteps = function (num) {
+  var count = 0,
+    res;
+  if (num == 0) {
+    return 0;
+  }
+  if (num % 2 == 0) {
+    count = 1;
+    res = numberOfSteps(Math.floor(num / 2));
+    return count + res;
+  } else {
+    count = 1;
+    res = numberOfSteps(num - 1);
+    return count + res;
+  }
 };
